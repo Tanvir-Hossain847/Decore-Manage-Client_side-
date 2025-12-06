@@ -8,6 +8,7 @@ import Coverage from '../Pages/Coverage';
 import About from '../Pages/About';
 import Contact from '../Pages/Contact';
 import Services from '../Pages/Services';
+import AuthLayout from '../Layouts/AuthLayout';
 
 export const router = createBrowserRouter([
   {
@@ -48,4 +49,18 @@ export const router = createBrowserRouter([
        
     ]
   },
+  {
+    path: '/auth',
+    element: <AuthLayout></AuthLayout>,
+    children: [
+      {
+        path: '/auth/login',
+        element: <Login></Login>,
+      },
+      {
+        path: '/auth/register',
+        element: <Registration></Registration>
+      }
+    ]
+  }
 ]);

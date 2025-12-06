@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import { Link, NavLink } from 'react-router';
 import { AuthContext } from '../Context/AuthContext';
 import { Menu, X, Sparkles } from 'lucide-react';
+import { Link, NavLink } from 'react-router';
 
 const Header = () => {
     const {user, signOutUser} = useContext(AuthContext);
@@ -77,13 +77,13 @@ const Header = () => {
                         ) : (
                             <>
                                 <NavLink 
-                                    to='/login'
+                                    to='/auth/login'
                                     className='px-5 py-2.5 text-gray-700 font-medium hover:text-[#628141] transition-colors duration-300'
                                 >
                                     Login
                                 </NavLink>
                                 <NavLink 
-                                    to='/register'
+                                    to='/auth/register'
                                     className='px-5 py-2.5 bg-[#628141] text-white rounded-lg font-medium hover:shadow-lg hover:scale-105 hover:bg-[#1B211A] transition-all duration-300'
                                 >
                                     Register
