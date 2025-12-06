@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { MapContainer, TileLayer, Circle, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { Link } from 'react-router';
 
 const Coverage = () => {
     // TODO: Fetch coverage zones from DB
@@ -78,7 +79,7 @@ const Coverage = () => {
                         </div>
                         
                         <div className="max-w-6xl mx-auto rounded-2xl overflow-hidden shadow-xl relative z-0" style={{ height: '600px' }}>
-                            <MapContainer center={[23.8103, 90.4125]} zoom={12} style={{ height: '100%', width: '100%', zIndex: 0 }}>
+                            <MapContainer center={[23.8103, 90.4125]} zoom={12} scrollWheelZoom={false} style={{ height: '100%', width: '100%', zIndex: 0 }}>
                                 <TileLayer
                                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -180,9 +181,9 @@ const Coverage = () => {
                             We're constantly expanding our service areas. Contact us to check if we can serve your location.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <button className="px-8 py-3.5 bg-[#628141] text-white rounded-xl font-semibold hover:bg-[#EBD5AB] hover:text-[#1B211A] transition-all duration-300">
+                            <Link to={'/contact'}><button className="px-8 py-3.5 bg-[#628141] text-white rounded-xl font-semibold hover:bg-[#EBD5AB] hover:text-[#1B211A] transition-all duration-300">
                                 Contact Us
-                            </button>
+                            </button></Link>
                             <a 
                                 href="mailto:info@decorhub.com"
                                 className="px-8 py-3.5 bg-transparent text-white rounded-xl font-semibold border-2 border-[#628141] hover:bg-[#628141]/10 transition-all duration-300 inline-flex items-center justify-center gap-2"
