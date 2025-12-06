@@ -28,3 +28,17 @@
 .animation-delay-4000 {
     animation-delay: 4s;
 }
+
+/* Fix Leaflet Map Z-Index */
+.leaflet-container {
+    z-index: 0 !important;
+}
+
+.leaflet-pane {
+    z-index: auto !important;
+}
+
+.leaflet-top,
+.leaflet-bottom {
+    z-index: 10 !important;
+}

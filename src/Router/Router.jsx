@@ -4,6 +4,7 @@ import Root from '../Layouts/root';
 import Home from '../Pages/Home';
 import Registration from '../Pages/Register';
 import Login from '../Pages/Login';
+import Coverage from '../Pages/Coverage';
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ export const router = createBrowserRouter([
         {
           path:'/login' ,
          element:<Login></Login>
+        },
+        {
+          path:'/coverage',
+          element:<Coverage></Coverage>
         },
        
     ]

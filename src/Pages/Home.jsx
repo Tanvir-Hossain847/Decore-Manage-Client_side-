@@ -1,7 +1,5 @@
 import React from 'react';
 import { motion } from "framer-motion";
-import { MapContainer, TileLayer, Circle, Popup } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
 import { Star, CheckCircle, Shield, DollarSign, Award, Clock, Users, ArrowRight, Sparkles } from 'lucide-react';
 
 const Home = () => {
@@ -49,15 +47,6 @@ const Home = () => {
         { id: 1, name: 'Jessica Williams', rating: 5, text: 'Amazing service! They transformed our wedding venue into a fairy tale. Highly recommended!', avatar: 'https://i.pravatar.cc/150?img=5' },
         { id: 2, name: 'Robert Brown', rating: 5, text: 'Professional team, great attention to detail. Our corporate event was a huge success!', avatar: 'https://i.pravatar.cc/150?img=6' },
         { id: 3, name: 'Amanda Lee', rating: 4, text: 'Beautiful home decor setup. The team was punctual and creative. Will book again!', avatar: 'https://i.pravatar.cc/150?img=7' },
-    ]);
-
-    // TODO: Fetch coverage zones from DB
-    // API Endpoint: GET /api/coverage-zones
-    // Expected fields: lat, lng, name, radius
-    const [coverageZones] = React.useState([
-        { lat: 23.8103, lng: 90.4125, name: 'Dhaka Central', radius: 5000 },
-        { lat: 23.7805, lng: 90.4258, name: 'Gulshan', radius: 3000 },
-        { lat: 23.7461, lng: 90.3742, name: 'Dhanmondi', radius: 3000 },
     ]);
 
     // Static data - can be moved to DB if needed
@@ -334,40 +323,6 @@ const Home = () => {
                                     </button>
                                 </motion.div>
                             ))}
-                        </div>
-                    </motion.div>
-                </div>
-            </section>
-
-            {/* Service Coverage Map */}
-            <section className="py-20 bg-white">
-                <div className="container mx-auto px-6 lg:px-12">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                    >
-                        <h2 className="text-3xl md:text-4xl font-bold text-center mb-3 text-[#1B211A]">Service Coverage</h2>
-                        <p className="text-center text-gray-600 mb-14 text-base">We serve across major areas</p>
-                        
-                        <div className="max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-xl" style={{ height: '480px' }}>
-                            <MapContainer center={[23.8103, 90.4125]} zoom={12} style={{ height: '100%', width: '100%' }}>
-                                <TileLayer
-                                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                                />
-                                {coverageZones.map((zone, index) => (
-                                    <Circle
-                                        key={index}
-                                        center={[zone.lat, zone.lng]}
-                                        radius={zone.radius}
-                                        pathOptions={{ color: '#628141', fillColor: '#628141', fillOpacity: 0.2 }}
-                                    >
-                                        <Popup>{zone.name}</Popup>
-                                    </Circle>
-                                ))}
-                            </MapContainer>
                         </div>
                     </motion.div>
                 </div>
