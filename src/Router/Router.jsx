@@ -5,6 +5,7 @@ import Home from '../Pages/Home';
 import Registration from '../Pages/Register';
 import Login from '../Pages/Login';
 import Coverage from '../Pages/Coverage';
+import Services from '../Pages/Services';
 
 export const router = createBrowserRouter([
   {
@@ -15,36 +16,17 @@ export const router = createBrowserRouter([
         {
             index: true,
             path:'/',
-  //             loader: async () => {
-  //   const [petsRes, tipsRes, vetsRes] = await Promise.all([
-  //     fetch('/pets.json'),
-  //     fetch('/tips.json'),
-  //     fetch('/vets.json')
-      
-  //   ]);
-
-  //   const [pets, tips, vets] = await Promise.all([
-  //     petsRes.json(),
-  //     tipsRes.json(),
-  //     vetsRes.json()
-  //   ]);
-
-  //   return { pets, tips,  vets};
-  // },
             element:<Home></Home>,
-        },
-        {
-          path:'/register',
-          element:<Registration></Registration>
-        },
-        {
-          path:'/login' ,
-         element:<Login></Login>
+            loader: () => fetch("/services.json").then(res => res.json())
         },
         {
           path:'/coverage',
           element:<Coverage></Coverage>
         },
+        {
+          path: '/services',
+          element: <Services></Services>
+        }
        
     ]
   },

@@ -1,15 +1,16 @@
 import React from 'react';
 import { motion } from "framer-motion";
 import { Star, CheckCircle, Shield, DollarSign, Award, Clock, Users, ArrowRight, Sparkles } from 'lucide-react';
+import { useLoaderData } from 'react-router';
+import ServiceCard from '../Components/ServiceCard';
 
 const Home = () => {
-    // ============================================
-    // TODO: FETCH DATA FROM DATABASE
-    // ============================================
-    
-    // TODO: Fetch categories from DB
-    // API Endpoint: GET /api/categories
-    // Expected fields: id, name, image, icon
+
+
+    const services = useLoaderData()
+    const featuredServices = services.slice(0,6)
+
+
     const [categories] = React.useState([
         { id: 1, name: 'Home Decor', image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=400', icon: '🏠' },
         { id: 2, name: 'Wedding', image: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=400', icon: '💒' },
@@ -18,18 +19,7 @@ const Home = () => {
         { id: 5, name: 'Ceremony', image: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=400', icon: '🎊' },
     ]);
 
-    // TODO: Fetch featured services from DB
-    // API Endpoint: GET /api/services/featured
-    // Expected fields: id, title, price, category, image, rating
-    const [featuredServices] = React.useState([
-        { id: 1, title: 'Luxury Home Makeover', price: 5999, category: 'Home Decor', image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=400', rating: 4.8 },
-        { id: 2, title: 'Dream Wedding Setup', price: 15999, category: 'Wedding', image: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400', rating: 4.9 },
-        { id: 3, title: 'Corporate Gala Decor', price: 8999, category: 'Corporate', image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400', rating: 4.7 },
-        { id: 4, title: 'Birthday Bash Package', price: 2999, category: 'Birthday', image: 'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400', rating: 4.6 },
-        { id: 5, title: 'Anniversary Celebration', price: 4999, category: 'Ceremony', image: 'https://images.unsplash.com/photo-1478146896981-b80fe463b330?w=400', rating: 4.8 },
-        { id: 6, title: 'Festival Decoration', price: 3499, category: 'Home Decor', image: 'https://images.unsplash.com/photo-1482517967863-00e15c9b44be?w=400', rating: 4.5 },
-    ]);
-
+    
     // TODO: Fetch top decorators from DB
     // API Endpoint: GET /api/decorators/top
     // Expected fields: id, name, photo, rating, specialty, reviews
@@ -244,41 +234,7 @@ const Home = () => {
                         <p className="text-center text-gray-600 mb-14 text-base">Handpicked decoration packages for you</p>
                         
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
-                            {featuredServices.map((service, index) => (
-                                <motion.div
-                                    key={service.id}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.2, delay: index * 0.1 }}
-                                    whileHover={{ y: -8 }}
-                                    className="bg-white rounded-2xl shadow-md hover:shadow-xl overflow-hidden group cursor-pointer transition-all duration-300"
-                                >
-                                    <div className="relative h-52 overflow-hidden">
-                                        <img src={service.image} alt={service.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
-                                        <div className="absolute top-3 right-3 bg-[#EBD5AB] px-3 py-1.5 rounded-full text-xs font-semibold text-[#1B211A]">
-                                            {service.category}
-                                        </div>
-                                    </div>
-                                    <div className="p-5">
-                                        <h3 className="text-lg font-bold mb-2 text-[#1B211A]">{service.title}</h3>
-                                        <div className="flex items-center mb-3">
-                                            <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                                            <span className="ml-1 text-[#1B211A] font-semibold text-sm">{service.rating}</span>
-                                            <span className="ml-1 text-gray-500 text-xs">(120+ reviews)</span>
-                                        </div>
-                                        <div className="flex items-center justify-between">
-                                            <div>
-                                                <span className="text-xl font-bold text-[#628141]">৳{service.price}</span>
-                                                <span className="text-gray-500 text-xs ml-1">onwards</span>
-                                            </div>
-                                            <button className="bg-[#628141] text-white px-5 py-2 rounded-full hover:bg-[#1B211A] transition-colors font-semibold text-sm">
-                                                Book Now
-                                            </button>
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            ))}
+                            {featuredServices.map((service, index) => <ServiceCard key={index} service={service} index={index}></ServiceCard>)}
                         </div>
                     </motion.div>
                 </div>
@@ -451,13 +407,7 @@ const Home = () => {
                                     Get Started Now
                                     <ArrowRight className="w-5 h-5" />
                                 </motion.button>
-                                <motion.button
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    className="px-10 py-4 bg-transparent text-white rounded-xl text-base font-semibold border-2 border-[#628141] hover:bg-[#628141]/10 transition-all duration-300"
-                                >
-                                    View Portfolio
-                                </motion.button>
+                               
                             </div>
 
                             {/* Trust Indicators */}
