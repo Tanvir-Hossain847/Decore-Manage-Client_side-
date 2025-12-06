@@ -38,14 +38,6 @@ export const router = createBrowserRouter([
           path:'/contact',
           element:<Contact></Contact>
         },
-        {
-          path:'/register',
-          element:<Registration></Registration>
-        },
-        {
-          path:'/login',
-          element:<Login></Login>
-        }
        
     ]
   },
