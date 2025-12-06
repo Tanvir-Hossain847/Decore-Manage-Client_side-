@@ -5,6 +5,8 @@ import Home from '../Pages/Home';
 import Registration from '../Pages/Register';
 import Login from '../Pages/Login';
 import Coverage from '../Pages/Coverage';
+import About from '../Pages/About';
+import Contact from '../Pages/Contact';
 import Services from '../Pages/Services';
 
 export const router = createBrowserRouter([
@@ -26,6 +28,22 @@ export const router = createBrowserRouter([
         {
           path: '/services',
           element: <Services></Services>
+        },
+        {
+          path:'/about',
+          element:<About></About>
+        },
+        {
+          path:'/contact',
+          element:<Contact></Contact>
+        },
+        {
+          path:'/register',
+          element:<Registration></Registration>
+        },
+        {
+          path:'/login',
+          element:<Login></Login>
         }
        
     ]
