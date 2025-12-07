@@ -1,12 +1,13 @@
 import React from 'react';
 import { motion } from "framer-motion";
 import { Star } from 'lucide-react';
+import { Link } from 'react-router';
 
 const ServiceCard = ({service, index}) => {
     return (
         <div>
              <motion.div
-                                    key={service.id}
+                                    key={service._id}
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
@@ -32,9 +33,9 @@ const ServiceCard = ({service, index}) => {
                                                 <span className="text-xl font-bold text-[#628141]">৳{service.cost}</span>
                                                 <span className="text-gray-500 text-xs ml-1">onwards</span>
                                             </div>
-                                            <button className="bg-[#628141] text-white px-5 py-2 rounded-full hover:bg-[#1B211A] transition-colors font-semibold text-sm">
+                                            <Link to={`/services/${service._id}`}><button className="bg-[#628141] text-white px-5 py-2 rounded-full hover:bg-[#1B211A] transition-colors font-semibold text-sm">
                                                 Book Now
-                                            </button>
+                                            </button></Link>
                                         </div>
                                     </div>
                                 </motion.div>

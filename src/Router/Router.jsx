@@ -8,6 +8,7 @@ import Coverage from '../Pages/Coverage';
 import About from '../Pages/About';
 import Contact from '../Pages/Contact';
 import Services from '../Pages/Services';
+import PackageDetail from '../Pages/PackageDetail';
 import AuthLayout from '../Layouts/AuthLayout';
 
 export const router = createBrowserRouter([
@@ -20,7 +21,7 @@ export const router = createBrowserRouter([
             index: true,
             path:'/',
             element:<Home></Home>,
-            loader: () => fetch("/services.json").then(res => res.json())
+            loader: () => fetch("http://localhost:3000/services").then(res => res.json())
         },
         {
           path:'/coverage',
@@ -29,6 +30,14 @@ export const router = createBrowserRouter([
         {
           path: '/services',
           element: <Services></Services>
+        },
+        {
+          path: '/package/:id',
+          element: <PackageDetail></PackageDetail>
+        },
+        {
+          path: '/services/:id',
+          element: <PackageDetail></PackageDetail>,
         },
         {
           path:'/about',
