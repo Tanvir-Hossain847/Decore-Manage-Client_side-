@@ -1,17 +1,24 @@
 import React, { use, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { useParams, useNavigate, data, useLocation } from 'react-router';
+import { useParams, useNavigate, useLocation } from 'react-router';
 import { Star, MapPin, Clock, Users, CheckCircle, X, Calendar, AlertCircle } from 'lucide-react';
 import { AuthContext } from '../Context/AuthContext';
 import Loder from '../Components/Loder';
+import { useForm } from 'react-hook-form';
+import PackegeBanner from '../Components/PackegeBanner';
+import PackageDescription from '../Components/PackageDescription';
+import useAxiosSecure from '../Hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const PackageDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-    const location = useLocation()
     const { user } = use(AuthContext);
     const [service, setService] = useState()
     const [showBookingModal, setShowBookingModal] = useState(false);
+    const { register, handleSubmit, reset } = useForm()
+    const axiosInstance = useAxiosSecure()
+
     const [bookingData, setBookingData] = useState({
         date: '',
         location: '',
@@ -58,9 +65,9 @@ const PackageDetail = () => {
         return <Loder></Loder>
     }
 
-    console.log(service);
-    console.log(location);
-    
+    // console.log(service);
+    // console.log(location);
+
 
     const { category, cost, description, image, rating, reviewCount, service_name, short_description } = service;
 
@@ -73,30 +80,40 @@ const PackageDetail = () => {
         });
     };
 
-    const handleBookingSubmit = (e) => {
-        e.preventDefault();
+    const handleBookingSubmit = (data) => {
+        console.log(data);
 
         if (!user) {
             // Redirect to login if not authenticated
-            navigate('/auth/login', { state: `/services/${id}`});
+            navigate('/auth/login', { state: `/services/${id}` });
             return;
         }
 
-        // TODO: SUBMIT BOOKING TO DATABASE
-        // API Endpoint: POST /api/bookings
-        // Payload: {
-        //   userId: user.uid,
-        //   userEmail: user.email,
-        //   userName: user.displayName,
-        //   packageId: packageData.id,
-        //   packageTitle: packageData.title,
-        //   packagePrice: packageData.price,
-        //   bookingDate: bookingData.date,
-        //   location: bookingData.location,
-        //   additionalNotes: bookingData.additionalNotes,
-        //   status: 'pending',
-        //   createdAt: new Date()
-        // }
+
+
+        const booking = {
+            userEmail: user.email,
+            userName: user.displayName,
+            packageId: service._id,
+            packageTitle: service.service_name,
+            packagePrice: service.cost,
+            bookingDate: bookingData.date,
+            location: bookingData.location,
+            additionalNotes: bookingData.additionalNotes,
+            status: 'pending',
+            createdAt: new Date()
+        }
+
+        axiosInstance.post("/booking", booking)
+            .then(res => {
+                console.log(res.data);
+            })
+
+        Swal.fire({
+            title: "Booking Succesful",
+            text: "Booking request submitted successfully! We will contact you soon.",
+            icon: "success"
+        });
 
         console.log('Booking submitted:', {
             user: {
@@ -112,7 +129,6 @@ const PackageDetail = () => {
         });
 
         setShowBookingModal(false);
-        alert('Booking request submitted successfully! We will contact you soon.');
         setBookingData({
             date: '',
             location: '',
@@ -122,7 +138,7 @@ const PackageDetail = () => {
 
     const openBookingModal = () => {
         if (!user) {
-            navigate('/auth/login', { state:`/services/${id}`});
+            navigate('/auth/login', { state: `/services/${id}` });
             return;
         }
         setShowBookingModal(true);
@@ -130,142 +146,13 @@ const PackageDetail = () => {
 
     return (
         <div className="min-h-screen bg-gray-50">
-            <section className="relative h-[60vh] overflow-hidden">
-                <img
-                    src={image}
-                    alt={service_name}
-                    className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-primary/80 via-primary/40 to-transparent"></div>
-
-                <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-12">
-                    <div className="container mx-auto">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6 }}
-                        >
-                            <div className="inline-block mb-4">
-                                <span className="px-4 py-2 bg-accent text-primary rounded-full text-sm font-semibold">
-                                    {category}
-                                </span>
-                            </div>
-                            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                                {service_name}
-                            </h1>
-                            <div className="flex flex-wrap items-center gap-6 text-white">
-                                <div className="flex items-center gap-2">
-                                    <Star className="w-5 h-5 text-yellow-400 fill-current" />
-                                    <span className="font-semibold">{rating}</span>
-                                    <span className="text-gray-200">({reviewCount} reviews)</span>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <Clock className="w-5 h-5" />
-                                    <span>{packageData.duration}</span>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <Users className="w-5 h-5" />
-                                    <span>{packageData.capacity}</span>
-                                </div>
-                            </div>
-                        </motion.div>
-                    </div>
-                </div>
-            </section>
+            <PackegeBanner service={service} packageData={packageData}></PackegeBanner>
 
             <section className="py-16">
                 <div className="container mx-auto px-6 lg:px-12">
-                    <div className="grid lg:grid-cols-3 gap-12">
-                        <div className="lg:col-span-2 space-y-8">
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.6 }}
-                                className="bg-white rounded-2xl shadow-md p-8"
-                            >
-                                <h2 className="text-2xl font-bold text-primary mb-4">About This Package</h2>
-                                <p className="text-gray-600 leading-relaxed mb-4">{short_description}</p>
-                                <p className="text-gray-600 leading-relaxed">{description}</p>
-                            </motion.div>
-
-
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.6 }}
-                                className="bg-white rounded-2xl shadow-md p-8"
-                            >
-                                <h2 className="text-2xl font-bold text-primary mb-6">Package Features</h2>
-                                <div className="grid md:grid-cols-2 gap-4">
-                                    {packageData.features.map((feature, index) => (
-                                        <div key={index} className="flex items-center gap-3">
-                                            <CheckCircle className="w-5 h-5 text-secondary shrink-0" />
-                                            <span className="text-gray-700">{feature}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </motion.div>
-
-                            {/* What's Included / Not Included */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.6 }}
-                                className="bg-white rounded-2xl shadow-md p-8"
-                            >
-                                <div className="grid md:grid-cols-2 gap-8">
-                                    {/* Included */}
-                                    <div>
-                                        <h3 className="text-xl font-bold text-primary mb-4">What's Included</h3>
-                                        <ul className="space-y-3">
-                                            {packageData.included.map((item, index) => (
-                                                <li key={index} className="flex items-start gap-2">
-                                                    <CheckCircle className="w-5 h-5 text-secondary shrink-0 mt-0.5" />
-                                                    <span className="text-gray-700 text-sm">{item}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-
-                                    {/* Not Included */}
-                                    <div>
-                                        <h3 className="text-xl font-bold text-primary mb-4">Not Included</h3>
-                                        <ul className="space-y-3">
-                                            {packageData.notIncluded.map((item, index) => (
-                                                <li key={index} className="flex items-start gap-2">
-                                                    <X className="w-5 h-5 text-gray-400 shrink-0 mt-0.5" />
-                                                    <span className="text-gray-600 text-sm">{item}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                </div>
-                            </motion.div>
-
-                            {/* Gallery
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.6 }}
-                                className="bg-white rounded-2xl shadow-md p-8"
-                            >
-                                <h2 className="text-2xl font-bold text-primary mb-6">Gallery</h2>
-                                <div className="grid grid-cols-2 gap-4">
-                                    {packageData.images.map((image, index) => (
-                                        <div key={index} className="relative h-64 rounded-xl overflow-hidden group cursor-pointer">
-                                            <img
-                                                src={image}
-                                                alt={`Gallery ${index + 1}`}
-                                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                                            />
-                                        </div>
-                                    ))}
-                                </div>
-                            </motion.div> */}
+                    <div className='flex lg:flex-row flex-col gap-12'>
+                        <div className="">
+                            <PackageDescription service={service} packageData={packageData}></PackageDescription>
                         </div>
 
                         {/* Right Column - Booking Card */}
@@ -353,7 +240,7 @@ const PackageDetail = () => {
                         </div>
 
                         {/* Modal Body */}
-                        <form onSubmit={handleBookingSubmit} className="p-6 space-y-6">
+                        <form onSubmit={handleSubmit(handleBookingSubmit)} className="p-6 space-y-6">
                             {/* Package Info */}
                             <div className="bg-accent/10 rounded-xl p-4">
                                 <h3 className="font-bold text-primary mb-2">{service_name}</h3>
@@ -369,6 +256,7 @@ const PackageDetail = () => {
                                     </label>
                                     <input
                                         type="text"
+                                        {...register('name')}
                                         value={user?.displayName || ''}
                                         disabled
                                         className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl bg-gray-50 text-gray-600"
@@ -380,6 +268,7 @@ const PackageDetail = () => {
                                     </label>
                                     <input
                                         type="email"
+                                        {...register('email')}
                                         value={user?.email || ''}
                                         disabled
                                         className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl bg-gray-50 text-gray-600"
@@ -395,6 +284,7 @@ const PackageDetail = () => {
                                     <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                                     <input
                                         type="date"
+                                        {...register('date')}
                                         name="date"
                                         value={bookingData.date}
                                         onChange={handleBookingChange}
@@ -413,6 +303,7 @@ const PackageDetail = () => {
                                     <MapPin className="absolute left-4 top-4 w-5 h-5 text-gray-400" />
                                     <textarea
                                         name="location"
+                                        {...register('location')}
                                         value={bookingData.location}
                                         onChange={handleBookingChange}
                                         required
@@ -430,6 +321,7 @@ const PackageDetail = () => {
                                 </label>
                                 <textarea
                                     name="additionalNotes"
+                                    {...register('additionalNotes')}
                                     value={bookingData.additionalNotes}
                                     onChange={handleBookingChange}
                                     rows="4"
