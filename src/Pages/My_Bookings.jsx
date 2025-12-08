@@ -1,55 +1,56 @@
-import React from 'react';
+import React, { use } from 'react';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { LucideEdit, LucideX } from 'lucide-react';
+import Loder from '../Components/Loder';
+import { AuthContext } from '../Context/AuthContext';
+import Swal from 'sweetalert2';
 
 const My_Bookings = () => {
+    const { user } = use(AuthContext)
 
     const axiosSecure = useAxiosSecure()
-    const { data: booking = [], refetch } = useQuery({
+    const { isLoading, data: booking = [], refetch } = useQuery({
         queryKey: ['myBookings'],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/booking`);
+            const res = await axiosSecure.get(`/booking?email=${user.email}`);
             return res.data
         }
     })
     console.log(booking);
 
-    // const { additionalNotes, bookingDate, createdAt, location, packageId, packagePrice, packageTitle, status, userEmail, userName, _id } = booking
+    if (isLoading) {
+        return <Loder></Loder>
+    }
 
-    // additionalNotes
-    // :
-    // "Fugiat consequatur "
-    // bookingDate
-    // :
-    // "2025-12-12"
-    // createdAt
-    // :
-    // "2025-12-07T18:30:52.215Z"
-    // location
-    // :
-    // "Atque proident iust"
-    // packageId
-    // :
-    // "693447d6409bf48e4effe9e7"
-    // packagePrice
-    // :
-    // 12000
-    // packageTitle
-    // :
-    // "Wedding Stage Decoration"
-    // status
-    // :
-    // "pending"
-    // userEmail
-    // :
-    // "tanvirhossaintufa@gmail.com"
-    // userName
-    // :
-    // "Tanvir Hossain"
-    // _id
-    // :
-    // "6935c7dc798394303dbb90c0"
+
+    const handleDelete = (id) => {
+        // console.log(id);
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#628141",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axiosSecure.delete(`/booking/${id}`)
+                    .then(res => {
+                        console.log(res.data);
+                        refetch()
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your parcel request has been deleted.",
+                            icon: "success"
+                        });
+                    })
+
+            }
+        });
+    }
 
     return (
         <div>
@@ -84,7 +85,7 @@ const My_Bookings = () => {
                                     <td className='badge bg-gray-500 text-white'>{bookings.status}</td>
                                     <td className='space-x-1.5'>
                                         <button className='btn btn-xs p-1 hover:scale-105 transition-all duration-200 btn-secondary'><LucideEdit></LucideEdit></button>
-                                        <button className='btn btn-xs p-1 hover:scale-105 transition-all duration-200 bg-red-500 text-white'><LucideX></LucideX></button>
+                                        <button onClick={() => handleDelete(bookings._id)} className='btn btn-xs p-1 hover:scale-105 transition-all duration-200 bg-red-500 text-white'><LucideX></LucideX></button>
                                     </td>
                                 </tr>)
                         }

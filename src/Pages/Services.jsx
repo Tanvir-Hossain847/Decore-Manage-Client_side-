@@ -3,6 +3,7 @@ import useAxiosSecure from '../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import ServiceCard from '../Components/ServiceCard';
 import { LucideAirplay, LucideSearch } from 'lucide-react';
+import Loder from '../Components/Loder';
 
 
 
@@ -14,7 +15,7 @@ const Services = () => {
 
 
     const axiosSecure = useAxiosSecure()
-    const { data: services = [], refetch } = useQuery({
+    const { isLoading, data: services = [], refetch } = useQuery({
         queryKey: ['myServices'],
         queryFn: async () => {
             const res = await axiosSecure.get(`/services`);
@@ -22,6 +23,9 @@ const Services = () => {
         }
     })
     console.log(services);
+    if(isLoading){
+        return <Loder></Loder>
+    }
 
     const categories = [...new Set(services.map(service => service.category))]
 

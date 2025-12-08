@@ -12,6 +12,7 @@ import PackageDetail from '../Pages/PackageDetail';
 import AuthLayout from '../Layouts/AuthLayout';
 import DashBoardLayout from '../Layouts/DashBoardLayout';
 import My_Bookings from '../Pages/My_Bookings';
+import MyProfile from '../Pages/MyProfile';
 
 export const router = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ export const router = createBrowserRouter([
       {
         path: '/dashboard/mybookings',
         element: <My_Bookings></My_Bookings>
+      },
+      {
+        path: '/dashboard/myprofile',
+        element: <MyProfile></MyProfile>
       }
     ]
   }
