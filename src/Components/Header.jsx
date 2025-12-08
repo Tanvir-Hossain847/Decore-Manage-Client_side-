@@ -6,11 +6,13 @@ import { Link, NavLink } from 'react-router';
 const Header = () => {
     const {user, signOutUser} = useContext(AuthContext);
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+    const [isProfileDropdownOpen, setIsProfileDropdownOpen] = React.useState(false);
     
     const handleSignout = () => {
         signOutUser()
         .then()
         .catch()
+        setIsProfileDropdownOpen(false);
     }
 
     const navLinks = [
@@ -57,8 +59,11 @@ const Header = () => {
                     {/* Right Side - Auth Buttons */}
                     <div className="hidden lg:flex items-center space-x-3">
                         {user ? (
-                            <>
-                                <Link to='/profile' className="group relative">
+                            <div className="relative">
+                                <button 
+                                    onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
+                                    className="group relative focus:outline-none"
+                                >
                                     <img 
                                         src={user?.photoURL || 'https://ui-avatars.com/api/?name=' + user?.displayName} 
                                         alt={user?.displayName}
@@ -66,14 +71,50 @@ const Header = () => {
                                         title={user.displayName} 
                                     />
                                     <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-[#628141] rounded-full border-2 border-white"></div>
-                                </Link>
-                                <button 
-                                    onClick={handleSignout} 
-                                    className='px-5 py-2.5 bg-[#628141] text-white rounded-lg font-medium hover:shadow-lg hover:scale-105 hover:bg-[#1B211A] transition-all duration-300'
-                                >
-                                    Log Out
                                 </button>
-                            </>
+
+                                {/* Dropdown Menu */}
+                                {isProfileDropdownOpen && (
+                                    <>
+                                        {/* Backdrop to close dropdown */}
+                                        <div 
+                                            className="fixed inset-0 z-10" 
+                                            onClick={() => setIsProfileDropdownOpen(false)}
+                                        ></div>
+                                        
+                                        {/* Dropdown Content */}
+                                        <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-20">
+                                            {/* User Info */}
+                                            <div className="px-4 py-3 border-b border-gray-100">
+                                                <p className="text-sm font-semibold text-[#1B211A]">{user?.displayName}</p>
+                                                <p className="text-xs text-gray-500 truncate">{user?.email}</p>
+                                            </div>
+
+                                            {/* Menu Items */}
+                                            <Link
+                                                to="/dashboard"
+                                                onClick={() => setIsProfileDropdownOpen(false)}
+                                                className="flex items-center px-4 py-3 text-gray-700 hover:bg-[#EBD5AB]/20 hover:text-[#628141] transition-colors"
+                                            >
+                                                <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                                                </svg>
+                                                Dashboard
+                                            </Link>
+
+                                            <button
+                                                onClick={handleSignout}
+                                                className="w-full flex items-center px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors"
+                                            >
+                                                <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                                </svg>
+                                                Log Out
+                                            </button>
+                                        </div>
+                                    </>
+                                )}
+                            </div>
                         ) : (
                             <>
                                 <NavLink 
@@ -125,26 +166,40 @@ const Header = () => {
                             <div className="pt-4 border-t border-gray-100 space-y-2">
                                 {user ? (
                                     <>
+                                        <div className="px-4 py-3 bg-[#EBD5AB]/20 rounded-lg">
+                                            <div className="flex items-center space-x-3 mb-3">
+                                                <img 
+                                                    src={user?.photoURL || 'https://ui-avatars.com/api/?name=' + user?.displayName} 
+                                                    alt={user?.displayName}
+                                                    className='w-10 h-10 rounded-full border-2 border-[#EBD5AB] object-cover' 
+                                                />
+                                                <div>
+                                                    <p className="font-semibold text-[#1B211A] text-sm">{user?.displayName}</p>
+                                                    <p className="text-xs text-gray-600 truncate">{user?.email}</p>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <Link 
-                                            to='/profile' 
+                                            to='/dashboard' 
                                             onClick={() => setIsMenuOpen(false)}
-                                            className="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-50"
+                                            className="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-[#EBD5AB]/20 text-gray-700"
                                         >
-                                            <img 
-                                                src={user?.photoURL || 'https://ui-avatars.com/api/?name=' + user?.displayName} 
-                                                alt={user?.displayName}
-                                                className='w-10 h-10 rounded-full border-2 border-[#EBD5AB] object-cover' 
-                                            />
-                                            <span className="font-medium text-gray-700">{user?.displayName}</span>
+                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                                            </svg>
+                                            <span className="font-medium">Dashboard</span>
                                         </Link>
                                         <button 
                                             onClick={() => {
                                                 handleSignout();
                                                 setIsMenuOpen(false);
                                             }} 
-                                            className='w-full px-4 py-3 bg-[#628141] text-white rounded-lg font-medium hover:bg-[#1B211A] transition-colors'
+                                            className='w-full flex items-center space-x-3 px-4 py-3 bg-red-50 text-red-600 rounded-lg font-medium hover:bg-red-100 transition-colors'
                                         >
-                                            Log Out
+                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                            </svg>
+                                            <span>Log Out</span>
                                         </button>
                                     </>
                                 ) : (

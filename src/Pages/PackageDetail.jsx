@@ -1,6 +1,6 @@
 import React, { use, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { useParams, useNavigate, useLocation } from 'react-router';
+import { useParams, useNavigate } from 'react-router';
 import { Star, MapPin, Clock, Users, CheckCircle, X, Calendar, AlertCircle } from 'lucide-react';
 import { AuthContext } from '../Context/AuthContext';
 import Loder from '../Components/Loder';
@@ -16,7 +16,7 @@ const PackageDetail = () => {
     const { user } = use(AuthContext);
     const [service, setService] = useState()
     const [showBookingModal, setShowBookingModal] = useState(false);
-    const { register, handleSubmit, reset } = useForm()
+    const { register, handleSubmit } = useForm()
     const axiosInstance = useAxiosSecure()
 
     const [bookingData, setBookingData] = useState({
@@ -69,7 +69,7 @@ const PackageDetail = () => {
     // console.log(location);
 
 
-    const { category, cost, description, image, rating, reviewCount, service_name, short_description } = service;
+    const { category, cost, service_name } = service;
 
 
 
@@ -150,8 +150,9 @@ const PackageDetail = () => {
 
             <section className="py-16">
                 <div className="container mx-auto px-6 lg:px-12">
-                    <div className='flex lg:flex-row flex-col gap-12'>
-                        <div className="">
+                    <div className="grid lg:grid-cols-3 gap-12">
+                        {/* Left Column - Details */}
+                        <div className="lg:col-span-2">
                             <PackageDescription service={service} packageData={packageData}></PackageDescription>
                         </div>
 
