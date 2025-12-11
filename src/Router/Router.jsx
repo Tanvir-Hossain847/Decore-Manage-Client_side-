@@ -1,6 +1,5 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router';
-import Root from '../Layouts/root';
 import Home from '../Pages/Home';
 import Registration from '../Pages/Register';
 import Login from '../Pages/Login';
@@ -13,12 +12,16 @@ import AuthLayout from '../Layouts/AuthLayout';
 import DashBoardLayout from '../Layouts/DashBoardLayout';
 import My_Bookings from '../Pages/My_Bookings';
 import MyProfile from '../Pages/MyProfile';
+import Root from '../Layouts/Root';
+import Error from '../Pages/Error';
+import Payment from '../Pages/Payment';
+import Payment_secces from '../Pages/Payment_secces';
+import Payment_Cancel from '../Pages/Payment_Cancel';
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element:<Root></Root>,
-    errorElement:<p>Add Firebase</p>,
     children: [
         {
             index: true,
@@ -54,6 +57,10 @@ export const router = createBrowserRouter([
     ]
   },
   {
+    path: '*',
+    element:<Error></Error>
+  },
+  {
     path: '/auth',
     element: <AuthLayout></AuthLayout>,
     children: [
@@ -78,6 +85,18 @@ export const router = createBrowserRouter([
       {
         path: '/dashboard/myprofile',
         element: <MyProfile></MyProfile>
+      },
+      {
+        path: '/dashboard/payments/:id',
+        element: <Payment></Payment>
+      },
+      {
+        path: '/dashboard/payment-success',
+        element: <Payment_secces></Payment_secces>
+      },
+       {
+        path: '/dashboard/payment-canceled',
+        element: <Payment_Cancel></Payment_Cancel>
       }
     ]
   }

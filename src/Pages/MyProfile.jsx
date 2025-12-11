@@ -9,15 +9,13 @@ const MyProfile = () => {
     const { user } = useContext(AuthContext);
     const [isEditing, setIsEditing] = useState(false);
 
-    // TODO: FETCH USER PROFILE DATA FROM DATABASE
-    // API Endpoint: GET /api/users/:userId
-    // Expected fields: phone, address, dateOfBirth, bio
     const [profileData, setProfileData] = useState({
         phone: '+880 1234-567890',
         address: '123 Main Street, Dhaka 1000',
         dateOfBirth: '1990-01-01',
         bio: 'Love celebrating special moments with beautiful decorations!'
     });
+    
 
      const axiosSecure = useAxiosSecure()
         const { data: booking = [] } = useQuery({

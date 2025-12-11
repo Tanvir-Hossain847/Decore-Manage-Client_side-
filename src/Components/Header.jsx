@@ -92,7 +92,7 @@ const Header = () => {
 
                                             {/* Menu Items */}
                                             <Link
-                                                to="/dashboard"
+                                                to="/dashboard/myprofile"
                                                 onClick={() => setIsProfileDropdownOpen(false)}
                                                 className="flex items-center px-4 py-3 text-gray-700 hover:bg-[#EBD5AB]/20 hover:text-[#628141] transition-colors"
                                             >

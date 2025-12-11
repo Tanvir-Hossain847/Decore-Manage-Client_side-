@@ -5,6 +5,7 @@ import { LucideEdit, LucideX } from 'lucide-react';
 import Loder from '../Components/Loder';
 import { AuthContext } from '../Context/AuthContext';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router';
 
 const My_Bookings = () => {
     const { user } = use(AuthContext)
@@ -79,9 +80,9 @@ const My_Bookings = () => {
                                     <td>{bookings.userEmail}</td>
                                     <td>{bookings.packageTitle}</td>
                                     <td>{bookings.packageId}</td>
-                                    <td>{bookings.packagePrice}</td>
+                                    <td className='font-bold'>{bookings.packagePrice}</td>
                                     <td>{bookings.location}</td>
-                                    <td><button className='btn btn-xs btn-secondary hover:scale-105 transition-all duration-200'>Pay</button></td>
+                                    <td><Link to={`/dashboard/payments/${bookings._id}`} className='btn btn-xs btn-secondary hover:scale-105 transition-all duration-200'>Pay</Link></td>
                                     <td className='badge bg-gray-500 text-white'>{bookings.status}</td>
                                     <td className='space-x-1.5'>
                                         <button className='btn btn-xs p-1 hover:scale-105 transition-all duration-200 btn-secondary'><LucideEdit></LucideEdit></button>
