@@ -28,6 +28,7 @@ const Payment = () => {
             cost: packagePrice,
             serviceName: packageTitle,
             email: userEmail,
+            packageId: packageId,
         }
 
         const res = await axiosSecure.post('/create-checkout-session', paymentInfo)

@@ -84,7 +84,6 @@ const PackageDetail = () => {
         console.log(data);
 
         if (!user) {
-            // Redirect to login if not authenticated
             navigate('/auth/login', { state: `/services/${id}` });
             return;
         }
