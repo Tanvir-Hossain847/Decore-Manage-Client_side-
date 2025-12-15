@@ -17,6 +17,7 @@ import Error from '../Pages/Error';
 import Payment from '../Pages/Payment';
 import Payment_secces from '../Pages/Payment_secces';
 import Payment_Cancel from '../Pages/Payment_Cancel';
+import PaymentHistory from '../Pages/PaymentHistory';
 
 export const router = createBrowserRouter([
   {
@@ -85,6 +86,10 @@ export const router = createBrowserRouter([
       {
         path: '/dashboard/myprofile',
         element: <MyProfile></MyProfile>
+      },
+      {
+        path: '/dashboard/paymentHistory',
+        element: <PaymentHistory></PaymentHistory>
       },
       {
         path: '/dashboard/payments/:id',

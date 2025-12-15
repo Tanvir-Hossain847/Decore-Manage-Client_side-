@@ -133,6 +133,7 @@ const PackageDetail = () => {
             location: '',
             additionalNotes: ''
         });
+        navigate('/dashboard/mybookings')
     };
 
     const openBookingModal = () => {

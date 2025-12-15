@@ -1,7 +1,7 @@
 import React from 'react';
 import Logo from '../Components/Logo';
 import { Link, Outlet } from 'react-router';
-import { LucideBook, LucideHome, LucideSettings, LucideUser } from 'lucide-react';
+import { LucideBook, LucideHome, LucideIdCard, LucideSettings, LucideUser } from 'lucide-react';
 
 const DashBoardLayout = () => {
     return (
@@ -46,6 +46,12 @@ const DashBoardLayout = () => {
                                 <Link to={'/dashboard/mybookings'}><button className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex items-center gap-2" data-tip="My Booking">
                                     <LucideBook className='text-secondary'></LucideBook>
                                     <span className="is-drawer-close:hidden">My Bookings</span>
+                                </button></Link>
+                            </li>
+                            <li>
+                                <Link to={'/dashboard/paymentHistory'}><button className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex items-center gap-2" data-tip="Payment History">
+                                    <LucideIdCard className='text-secondary'></LucideIdCard>
+                                    <span className="is-drawer-close:hidden">Payment History</span>
                                 </button></Link>
                             </li>
 
