@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
 import Loder from "../Components/Loder";
 import { LucideEye, LucideEyeClosed } from "lucide-react";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 
 
@@ -14,7 +15,7 @@ const Login = () => {
      const [err, setErr] = useState(null);
      const [showPass, setShowPass] = useState(false);
      const [email, setEmail] = useState('')
-     
+     const axiosSecure = useAxiosSecure()
 
     // //default direct after login
     // const from = (location.state || '/');
@@ -44,8 +45,20 @@ const Login = () => {
          signInWithGoogle()
          .then(result => {
             console.log(result.user);
-            navigate(location.state || '/')
            //toast.success('Logged in successfully! 🎉');
+
+           const userInfo = {
+          email: result.user.email,
+          displayName: result.user.displayName,
+          photoURL: result.user.photoURL,
+        }
+        
+        axiosSecure.post('/users', userInfo)
+        .then(res =>{
+          console.log("user added to list", res.data);
+          navigate(location.state || '/')
+        })
+
          })
          .catch(err => {
             //toast.error(err.message);

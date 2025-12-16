@@ -9,7 +9,8 @@ import { Link } from "react-router";
 
 const My_Bookings = () => {
   const { user } = use(AuthContext);
-
+  console.log(user);
+  
   const axiosSecure = useAxiosSecure();
   const {
     isLoading,

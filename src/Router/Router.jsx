@@ -18,6 +18,7 @@ import Payment from '../Pages/Payment';
 import Payment_secces from '../Pages/Payment_secces';
 import Payment_Cancel from '../Pages/Payment_Cancel';
 import PaymentHistory from '../Pages/PaymentHistory';
+import Decorator from '../Pages/Decorator';
 
 export const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ export const router = createBrowserRouter([
           path:'/contact',
           element:<Contact></Contact>
         },
+        {
+          path: '/decorater',
+          element: <Decorator></Decorator>,
+        }
        
     ]
   },
