@@ -15,6 +15,8 @@ const MyProfile = () => {
         dateOfBirth: '1990-01-01',
         bio: 'Love celebrating special moments with beautiful decorations!'
     });
+    console.log(user);
+    
     
 
      const axiosSecure = useAxiosSecure()
