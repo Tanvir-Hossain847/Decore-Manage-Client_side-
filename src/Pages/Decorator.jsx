@@ -81,8 +81,7 @@ const Decorator = () => {
             <div className="card-body">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <fieldset className="fieldset">
-                  {/* Basic Identity Section */}
-                  <div className="mb-6">
+                    <div className="mb-6">
                     <h2 className="text-xl font-semibold mb-4 text-secondary">
                       Decorator Form
                     </h2>

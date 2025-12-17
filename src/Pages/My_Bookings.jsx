@@ -10,13 +10,9 @@ import { Link } from "react-router";
 const My_Bookings = () => {
   const { user } = use(AuthContext);
   console.log(user);
-  
+
   const axiosSecure = useAxiosSecure();
-  const {
-    isLoading,
-    data: booking = [],
-    refetch,
-  } = useQuery({
+  const {isLoading, data: booking = [], refetch,} = useQuery({
     queryKey: ["myBookings"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/booking?email=${user.email}`);

@@ -19,6 +19,7 @@ import Payment_secces from '../Pages/Payment_secces';
 import Payment_Cancel from '../Pages/Payment_Cancel';
 import PaymentHistory from '../Pages/PaymentHistory';
 import Decorator from '../Pages/Decorator';
+import ApproveDecorator from '../Pages/ApproveDecorator';
 
 export const router = createBrowserRouter([
   {
@@ -107,6 +108,10 @@ export const router = createBrowserRouter([
        {
         path: '/dashboard/payment-canceled',
         element: <Payment_Cancel></Payment_Cancel>
+      },
+      {
+        path: '/dashboard/approve_decorator',
+        element: <ApproveDecorator></ApproveDecorator>
       }
     ]
   }
