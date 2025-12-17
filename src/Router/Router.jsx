@@ -20,6 +20,7 @@ import Payment_Cancel from '../Pages/Payment_Cancel';
 import PaymentHistory from '../Pages/PaymentHistory';
 import Decorator from '../Pages/Decorator';
 import ApproveDecorator from '../Pages/ApproveDecorator';
+import User from '../Pages/User';
 
 export const router = createBrowserRouter([
   {
@@ -111,7 +112,11 @@ export const router = createBrowserRouter([
       },
       {
         path: '/dashboard/approve_decorator',
-        element: <ApproveDecorator></ApproveDecorator>
+        element: <ApproveDecorator></ApproveDecorator>,
+      },
+      {
+        path: '/dashboard/users',
+        element: <User></User>,
       }
     ]
   }

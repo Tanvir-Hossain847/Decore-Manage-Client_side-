@@ -24,48 +24,57 @@ const ApproveDecorator = () => {
     return <Loder></Loder>;
   }
 
-  const handleApproval = (id, status) => {
+  const handleApproval = (id, status, email) => {
     const updateInfo = {
       status: "Approved",
+      email: email,
     };
-    if(status === "Approved"){
-      return  Swal.fire({
-          title: "Decorator Already Approved",
-          icon: "info",
-        });
+    if (status === "Approved") {
+      return Swal.fire({
+        title: "Decorator Already Approved",
+        icon: "info",
+      });
     }
-    axiosSecure.patch(`/decorator/${id}`, updateInfo)
-    .then((res) => {
+    axiosSecure.patch(`/decorator/${id}`, updateInfo).then((res) => {
       if (res.data.modifiedCount) {
         Swal.fire({
           title: "Decorator Approved",
           icon: "success",
         });
-        refetch()
+        refetch();
       }
     });
   };
-  
-  
+
   const handleRejection = (id, status) => {
     const updateInfo = {
       status: "Rejected",
     };
-    if(status === "Rejected"){
-      return  Swal.fire({
-          title: "Decorator Already Approved",
-          icon: "info",
-        });
+    if (status === "Rejected") {
+      return Swal.fire({
+        title: "Decorator Already Approved",
+        icon: "info",
+      });
     }
-    axiosSecure.patch(`/decorator/${id}`, updateInfo)
-    .then((res) => {
+    axiosSecure.patch(`/decorator/${id}`, updateInfo).then((res) => {
       if (res.data.modifiedCount) {
         Swal.fire({
           title: "Decorator Rejected",
           icon: "success",
         });
-        refetch()
+        refetch();
       }
+    });
+  };
+
+  const handleDelete = (id) => {
+    axiosSecure.delete(`/decorator/${id}`).then((res) => {
+      console.log(res.data);
+      refetch();
+       Swal.fire({
+          title: "Decorator Deleted",
+          icon: "success",
+        });
     });
   };
 
@@ -133,20 +142,61 @@ const ApproveDecorator = () => {
                   </div>
                 </td>
                 <td>
-                  <div className={`${decorator.status === "Approved" ? 'badge badge-secondary' : decorator.status === "Rejected" ? "badge bg-red-500 text-white" : "badge badge-neutral"}`}>{decorator.status}</div>
+                  <div
+                    className={`${
+                      decorator.status === "Approved"
+                        ? "badge badge-secondary"
+                        : decorator.status === "Rejected"
+                        ? "badge bg-red-500 text-white"
+                        : "badge badge-neutral"
+                    }`}
+                  >
+                    {decorator.status}
+                  </div>
                 </td>
                 <td>
                   <div className="flex flex-col">
                     <button
-                      onClick={() => handleApproval(decorator._id, decorator.status)}
-                      className="btn btn-secondary"
+                      onClick={() =>
+                        handleApproval(decorator._id, decorator.status, decorator.email)
+                      }
+                      className={`${
+                        decorator.status === "Approved" ||
+                        decorator.status === "Rejected"
+                          ? "btn btn-disabled"
+                          : "btn btn-secondary"
+                      }`}
                     >
                       Approve
                     </button>
-                    <button onClick={() => handleRejection(decorator._id, decorator.status)} className="btn btn-accent">Reject</button>
-                    {
-                      decorator.status === "Approved"  && (<button className="btn btn-neutral text-white">Delete</button>) ||  decorator.status === "Rejected" && (<button className="btn btn-neutral text-white">Delete</button>)
-                     }
+                    <button
+                      onClick={() =>
+                        handleRejection(decorator._id, decorator.status)
+                      }
+                      className={`${
+                        decorator.status === "Approved" ||
+                        decorator.status === "Rejected"
+                          ? "btn btn-disabled"
+                          : "btn btn-accent"
+                      }`}
+                    >
+                      Reject
+                    </button>
+                    {(decorator.status === "Approved" && (
+                      <button
+                        onClick={() => handleDelete(decorator._id)}
+                        className="btn btn-neutral text-white"
+                      >
+                        Delete
+                      </button>
+                    )) ||
+                      (decorator.status === "Rejected" && (
+                        <button 
+                        onClick={() => handleDelete(decorator._id)}
+                        className="btn btn-neutral text-white">
+                          Delete
+                        </button>
+                      ))}
                   </div>
                 </td>
               </tr>

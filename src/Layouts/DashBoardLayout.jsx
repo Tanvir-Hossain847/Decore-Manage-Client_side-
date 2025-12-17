@@ -60,6 +60,12 @@ const DashBoardLayout = () => {
                                     <span className="is-drawer-close:hidden">Approve Decorator</span>
                                 </button></Link>
                             </li>
+                            <li>
+                                <Link to={'/dashboard/users'}><button className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex items-center gap-2" data-tip="Users">
+                                    <LucideUser className='text-secondary'></LucideUser>
+                                    <span className="is-drawer-close:hidden">Users</span>
+                                </button></Link>
+                            </li>
 
                             {/* List item */}
                             <li>
