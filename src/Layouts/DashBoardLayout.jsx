@@ -12,8 +12,13 @@ import {
   LucideUser,
   SprayCan,
 } from "lucide-react";
+import useRole from "../Hooks/useRole";
 
 const DashBoardLayout = () => {
+  const {role} = useRole()
+  console.log("in dashboard the role is", role);
+  
+
   return (
     <div>
       <div className="drawer lg:drawer-open">
@@ -109,7 +114,9 @@ const DashBoardLayout = () => {
                   </button>
                 </Link>
               </li>
-              <li>
+              {
+                role === "Admin" && <>
+                <li>
                 <Link to={"/dashboard/approve_decorator"}>
                   <button
                     className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex items-center gap-2"
@@ -172,6 +179,9 @@ const DashBoardLayout = () => {
                   </button>
                 </Link>
               </li>
+                </>
+              }
+              
 
               {/* List item */}
               <li>

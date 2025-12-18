@@ -4,6 +4,7 @@ import { AuthContext } from '../Context/AuthContext';
 import { User, Mail, Phone, MapPin, Calendar, Edit2, Camera, Save, X } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
+import Loder from '../Components/Loder';
 
 const MyProfile = () => {
     const { user } = useContext(AuthContext);
@@ -17,7 +18,6 @@ const MyProfile = () => {
     });
     console.log(user);
     
-    
 
      const axiosSecure = useAxiosSecure()
         const { data: booking = [] } = useQuery({
@@ -30,9 +30,6 @@ const MyProfile = () => {
 
     const handleProfileUpdate = (e) => {
         e.preventDefault();
-        // TODO: UPDATE USER PROFILE IN DATABASE
-        // API Endpoint: PUT /api/users/:userId
-        // Payload: profileData
         console.log('Profile updated:', profileData);
         setIsEditing(false);
         alert('Profile updated successfully!');

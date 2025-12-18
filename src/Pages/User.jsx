@@ -40,7 +40,7 @@ const User = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.patch(`/users/${id}`, updateRole).then((res) => {
+        axiosSecure.patch(`/users/${id}/role`, updateRole).then((res) => {
           if (res.data.modifiedCount) {
             Swal.fire({
               title: ` Role Changed To ${role} `,
@@ -92,7 +92,7 @@ const User = () => {
                     <p>{user.createdAt}</p>
                   </div>
                 </td>
-                <td className="btn btn-accent mt-7">{user.role}</td>
+                <td className="btn btn-accent mt-7 text-center">{user.role}</td>
                 <td>
                   <div className="">
                     <form action="">
@@ -105,6 +105,7 @@ const User = () => {
                           <option disabled={true}>Change Role</option>
                           <option>User</option>
                           <option>Decorator</option>
+                          <option>Admin</option>
                         </select>
                       </fieldset>
                     </form>
