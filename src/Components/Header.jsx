@@ -60,7 +60,7 @@ const Header = () => {
                 <div className="">
                     <Link to={'/decorater'}><button className="btn btn-secondary">Be A Decorater</button></Link>
                   </div>
-              <div className="relative mt-5">
+              <div className="relative">
                 <button
                   onClick={() =>
                     setIsProfileDropdownOpen(!isProfileDropdownOpen)

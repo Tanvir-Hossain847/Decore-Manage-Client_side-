@@ -41,6 +41,7 @@ const Decorator = () => {
         serviceArea: data.serviceArea,
         availableDays: data.availableDays,
         applicationDate: new Date(),
+        assignedTask: [],
         status: "pending",
       };
 

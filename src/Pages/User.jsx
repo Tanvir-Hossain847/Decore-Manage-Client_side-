@@ -2,6 +2,7 @@ import React from "react";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loder from "../Components/Loder";
+import Swal from "sweetalert2";
 
 const User = () => {
   const axiosSecure = useAxiosSecure();
@@ -21,9 +22,41 @@ const User = () => {
     return <Loder></Loder>;
   }
 
-  const handleRoleChange = (id) => {
-    
-  }
+  const handleRoleChange = (e, id) => {
+    const role = e.target.value;
+    if (role === "Change Role") {
+      return;
+    }
+    const updateRole = {
+      role: role,
+    };
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You Want To Change This Users Role",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.patch(`/users/${id}`, updateRole).then((res) => {
+          if (res.data.modifiedCount) {
+            Swal.fire({
+              title: ` Role Changed To ${role} `,
+              icon: "success",
+            });
+            refetch();
+          }
+        });
+        Swal.fire({
+          title: "Changed",
+          text: "Role Succesfully Changed.",
+          icon: "success",
+        });
+      }
+    });
+  };
 
   return (
     <div>
@@ -64,11 +97,14 @@ const User = () => {
                   <div className="">
                     <form action="">
                       <fieldset>
-                        <select defaultValue="Pick a color" className="select w-40">
+                        <select
+                          onChange={(e) => handleRoleChange(e, user._id)}
+                          defaultValue="Pick a color"
+                          className="select w-40"
+                        >
                           <option disabled={true}>Change Role</option>
                           <option>User</option>
                           <option>Decorator</option>
-                          <option>Admin</option>
                         </select>
                       </fieldset>
                     </form>

@@ -21,6 +21,9 @@ import PaymentHistory from '../Pages/PaymentHistory';
 import Decorator from '../Pages/Decorator';
 import ApproveDecorator from '../Pages/ApproveDecorator';
 import User from '../Pages/User';
+import CreateService from '../Pages/CreateService';
+import RevenueChart from '../Pages/RevenueChart';
+import ServiceDemandChart from '../Pages/ServiceDemandChart';
 
 export const router = createBrowserRouter([
   {
@@ -117,6 +120,18 @@ export const router = createBrowserRouter([
       {
         path: '/dashboard/users',
         element: <User></User>,
+      },
+      {
+        path: '/dashboard/create_service',
+        element: <CreateService></CreateService>
+      },
+      {
+        path: '/dashboard/revenue',
+        element: <RevenueChart></RevenueChart>
+      },
+      {
+        path: '/dashboard/service_demand',
+        element: <ServiceDemandChart></ServiceDemandChart>
       }
     ]
   }
