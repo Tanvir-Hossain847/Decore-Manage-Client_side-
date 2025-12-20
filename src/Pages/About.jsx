@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Award, Users, Target, Heart, CheckCircle, Sparkles } from 'lucide-react';
+import { Link } from 'react-router';
 
 const About = () => {
     const stats = [
@@ -184,47 +185,6 @@ const About = () => {
                 </div>
             </section>
 
-            {/* Our Team */}
-            <section className="py-20 bg-accent/10">
-                <div className="container mx-auto px-6 lg:px-12">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                    >
-                        <div className="text-center mb-14">
-                            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-3">Meet Our Team</h2>
-                            <p className="text-gray-600 text-base">The creative minds behind your perfect celebration</p>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-                            {team.map((member, index) => (
-                                <motion.div
-                                    key={index}
-                                    initial={{ opacity: 0, scale: 0.9 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                                    className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
-                                >
-                                    <div className="relative h-64 overflow-hidden">
-                                        <img 
-                                            src={member.image} 
-                                            alt={member.name} 
-                                            className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                                        />
-                                    </div>
-                                    <div className="p-6 text-center">
-                                        <h3 className="text-lg font-bold text-primary mb-1">{member.name}</h3>
-                                        <p className="text-secondary text-sm font-semibold">{member.role}</p>
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </motion.div>
-                </div>
-            </section>
 
             {/* CTA Section */}
             <section className="py-20 bg-primary text-white">
@@ -243,12 +203,9 @@ const About = () => {
                             Let's create something beautiful together. Get in touch and let's start planning your perfect event.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <button className="px-8 py-3.5 bg-secondary text-white rounded-xl font-semibold hover:bg-accent hover:text-primary transition-all duration-300">
+                            <Link to={'/services'} className="px-8 py-3.5 bg-secondary text-white rounded-xl font-semibold hover:bg-accent hover:text-primary transition-all duration-300">
                                 Get Started
-                            </button>
-                            <button className="px-8 py-3.5 bg-transparent text-white rounded-xl font-semibold border-2 border-secondary hover:bg-secondary/10 transition-all duration-300">
-                                View Our Work
-                            </button>
+                            </Link>
                         </div>
                     </motion.div>
                 </div>

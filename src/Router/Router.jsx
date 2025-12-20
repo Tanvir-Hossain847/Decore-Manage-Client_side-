@@ -28,6 +28,8 @@ import AdminRoute from "../PrivateRoute/AdminRoute";
 import AssignDecorator from "../Pages/AssignDecorator";
 import AssignedPackage from "../Pages/AssignedPackage";
 import DecoratorRoute from "../PrivateRoute/DecoratorRoute";
+import CompletedTask from "../Pages/CompletedTask";
+import TotalPayment from "../Pages/TotalPayment";
 
 export const router = createBrowserRouter([
   {
@@ -120,6 +122,14 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/assignedpackage",
         element: <DecoratorRoute><AssignedPackage></AssignedPackage></DecoratorRoute>
+      },
+      {
+        path: "/dashboard/completedtask",
+        element: <DecoratorRoute><CompletedTask></CompletedTask></DecoratorRoute>
+      },
+      {
+        path: "/dashboard/totalpayment",
+        element: <DecoratorRoute><TotalPayment></TotalPayment></DecoratorRoute>
       },
       {
         path: "/dashboard/approve_decorator",

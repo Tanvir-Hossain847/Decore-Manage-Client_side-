@@ -79,25 +79,33 @@ const My_Bookings = () => {
                 <td>{bookings.packageId}</td>
                 <td className="font-bold">{bookings.packagePrice}</td>
                 <td>{bookings.location}</td>
-                <td>
+               <td>
+                {
+                  bookings.status === "Paid" ? <Link
+                    className="btn btn-xs btn-disabled btn-secondary hover:scale-105 transition-all duration-200"
+                  >
+                    Pay
+                  </Link>
+                  :
                   <Link
                     to={`/dashboard/payments/${bookings._id}`}
                     className="btn btn-xs btn-secondary hover:scale-105 transition-all duration-200"
                   >
                     Pay
                   </Link>
-                </td>
+                }
+               </td>
                 <td
                   className={`badge text-white ${
-                    bookings.status === "paid" ? "bg-green-600" : "bg-gray-500"
+                    bookings.status === "Paid" ? "bg-green-600" : "bg-gray-500"
                   }`}
                 >
                   {bookings.status}
                 </td>{" "}
                 <td className="space-x-1.5">
-                  <button className="btn btn-xs p-1 hover:scale-105 transition-all duration-200 btn-secondary">
+                  {/* <button className="btn btn-xs p-1 hover:scale-105 transition-all duration-200 btn-secondary">
                     <LucideEdit></LucideEdit>
-                  </button>
+                  </button> */}
                   <button
                     onClick={() => handleDelete(bookings._id)}
                     className="btn btn-xs p-1 hover:scale-105 transition-all duration-200 bg-red-500 text-white"

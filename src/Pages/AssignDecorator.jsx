@@ -10,9 +10,9 @@ const AssignDecorator = () => {
   const [isAssigning, setIsAssigning] = useState(false);
 
   const { data: services = [], refetch: refetchServices } = useQuery({
-    queryKey: ["services", "Pending"],
+    queryKey: ["services", "Pending", "Rejected"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/booking?workStatus=Pending");
+      const res = await axiosSecure.get("/booking?workStatus=Pending&workStatus=Rejected");
       return res.data;
     },
   });
@@ -55,12 +55,12 @@ const AssignDecorator = () => {
     axiosSecure.patch(`/booking/${selectedService._id}`, decoratorInfo)
       .then((res) => {
         if (res.data.modifiedCount) {
-          refetchServices();
           Swal.fire({
             title: "Decorator Assigned",
             text: `You have assigned ${decorator.fullName} to this task`,
             icon: "success",
           });
+          refetchServices();
           handleCloseModal();
         }
       });

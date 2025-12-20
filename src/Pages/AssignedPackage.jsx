@@ -53,6 +53,24 @@ const AssignedPackage = () => {
     });
   };
 
+
+  const handleReject = (task) => {
+    
+    const updateInfo = {
+      workStatus: "Reject",
+    };
+    axiosSecure.patch(`/booking/${task._id}/status`, updateInfo).then((res) => {
+      if (res.data.modifiedCount) {
+        refetch();
+        Swal.fire({
+          title: "Task Rejected",
+          text: `Thank You For Your Time, This Task Will Assign To A New Decorator`,
+          icon: "success",
+        });
+      }
+    });
+  };
+
   const handleCompleted = (task) => {
     const decorator = decorators.find(d => d._id.toString() === task.decoratorId.toString())
     console.log("this is the specific decorator",decorator.currentStatus);
@@ -130,7 +148,7 @@ const AssignedPackage = () => {
                         >
                           Accept
                         </button>
-                        <button className="btn btn-accent">Reject</button>
+                        <button onClick={() => handleReject(task)} className="btn btn-accent">Reject</button>
                       </>                      
                     }
                   </div>

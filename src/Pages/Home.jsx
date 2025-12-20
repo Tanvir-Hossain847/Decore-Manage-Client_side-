@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { MapContainer, TileLayer, Circle, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Star, CheckCircle, Shield, DollarSign, Award, Clock, Users, ArrowRight, Sparkles } from 'lucide-react';
-import { useLoaderData } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 import ServiceCard from '../Components/ServiceCard';
+import useAxiosSecure from '../Hooks/useAxiosSecure';
+import Loder from '../Components/Loder';
 
 const Home = () => {
 
 
     const services = useLoaderData()
     const featuredServices = services.slice(0,6)
+    const [topDecorators, setTopDecorators] = useState()
 
 
     const [categories] = React.useState([
@@ -22,16 +25,16 @@ const Home = () => {
     ]);
 
     
-    // TODO: Fetch top decorators from DB
-    // API Endpoint: GET /api/decorators/top
-    // Expected fields: id, name, photo, rating, specialty, reviews
-    const [topDecorators] = React.useState([
-        { id: 1, name: 'Sarah Johnson', photo: 'https://i.pravatar.cc/150?img=1', rating: 4.9, specialty: 'Wedding & Events', reviews: 234 },
-        { id: 2, name: 'Michael Chen', photo: 'https://i.pravatar.cc/150?img=2', rating: 4.8, specialty: 'Home Interiors', reviews: 189 },
-        { id: 3, name: 'Emily Rodriguez', photo: 'https://i.pravatar.cc/150?img=3', rating: 4.9, specialty: 'Corporate Events', reviews: 156 },
-        { id: 4, name: 'David Kumar', photo: 'https://i.pravatar.cc/150?img=4', rating: 4.7, specialty: 'Birthday Parties', reviews: 142 },
-    ]);
-
+   const axiosSecure = useAxiosSecure()
+   useEffect(() => {
+    axiosSecure.get('/decorator')
+    .then(res => {
+        setTopDecorators(res.data)
+    })
+   }, [axiosSecure])
+   console.log(topDecorators);
+   
+   
     // TODO: Fetch testimonials from DB
     // API Endpoint: GET /api/testimonials
     // Expected fields: id, name, rating, text, avatar
@@ -60,23 +63,11 @@ const Home = () => {
         { icon: <Users className="w-8 h-8" />, title: 'Expert Team', desc: 'Experienced decoration specialists' },
     ];
 
-    // TODO: Add useEffect to fetch data on component mount
-    // React.useEffect(() => {
-    //     // Fetch categories
-    //     fetch('/api/categories').then(res => res.json()).then(data => setCategories(data));
-    //     
-    //     // Fetch featured services
-    //     fetch('/api/services/featured').then(res => res.json()).then(data => setFeaturedServices(data));
-    //     
-    //     // Fetch top decorators
-    //     fetch('/api/decorators/top').then(res => res.json()).then(data => setTopDecorators(data));
-    //     
-    //     // Fetch testimonials
-    //     fetch('/api/testimonials').then(res => res.json()).then(data => setTestimonials(data));
-    //     
-    //     // Fetch coverage zones
-    //     fetch('/api/coverage-zones').then(res => res.json()).then(data => setCoverageZones(data));
-    // }, []);
+    
+       if(!topDecorators){
+        return <Loder></Loder>
+       }
+   
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -136,13 +127,11 @@ const Home = () => {
                                 transition={{ duration: 0.6, delay: 0.5 }}
                                 className="flex flex-col sm:flex-row gap-4 pt-2"
                             >
-                                <button className="px-8 py-3.5 bg-[#628141] text-white rounded-xl font-semibold text-base shadow-lg hover:shadow-xl hover:bg-[#1B211A] transition-all duration-300 inline-flex items-center justify-center gap-2">
+                                <Link to={'/services'} className="px-8 py-3.5 bg-[#628141] text-white rounded-xl font-semibold text-base shadow-lg hover:shadow-xl hover:bg-[#1B211A] transition-all duration-300 inline-flex items-center justify-center gap-2">
                                     Book Now
                                     <ArrowRight className="w-5 h-5" />
-                                </button>
-                                <button className="px-8 py-3.5 bg-white text-[#1B211A] rounded-xl font-semibold text-base shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 border-2 border-[#628141]">
-                                    View Services
-                                </button>
+                                </Link>
+                               
                             </motion.div>
 
                             {/* Stats */}
@@ -264,7 +253,7 @@ const Home = () => {
                         <p className="text-center text-gray-600 mb-14 text-base">Meet our verified decoration experts</p>
                         
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {topDecorators.map((decorator, index) => (
+                            {topDecorators.slice(0, 4).map((decorator, index) => (
                                 <motion.div
                                     key={decorator.id}
                                     initial={{ opacity: 0, scale: 0.9 }}
@@ -274,16 +263,23 @@ const Home = () => {
                                     whileHover={{ y: -8 }}
                                     className="bg-white rounded-2xl shadow-md hover:shadow-xl p-6 text-center transition-all duration-300"
                                 >
-                                    <div className="relative inline-block mb-4">
-                                        <img src={decorator.photo} alt={decorator.name} className="w-20 h-20 rounded-full mx-auto border-4 border-[#EBD5AB]" />
-                                        <div className="absolute -bottom-1 -right-1 bg-[#628141] w-5 h-5 rounded-full border-2 border-white"></div>
+                                    <div className="relative inline-block mb-4">                                        
+                                        <div className="bg-white border-8 border-secondary w-10 h-10 rounded-4xl"></div>
                                     </div>
-                                    <h3 className="text-lg font-bold mb-1 text-[#1B211A]">{decorator.name}</h3>
+                                    <h3 className="text-lg font-bold mb-1 text-[#1B211A]">{decorator.fullName}</h3>
                                     <p className="text-[#628141] font-semibold mb-3 text-sm">{decorator.specialty}</p>
-                                    <div className="flex items-center justify-center mb-2">
+                                    <div className="flex flex-col gap-2 items-center justify-center mb-2">
                                         <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                                        <span className="ml-1 font-bold text-[#1B211A] text-sm">{decorator.rating}</span>
-                                        <span className="ml-1 text-gray-500 text-xs">({decorator.reviews} reviews)</span>
+                                        <span className="ml-1 font-bold text-[#1B211A] text-sm">{decorator.currentStatus}</span>
+                                        <span className="ml-1 text-gray-500 text-xs">({decorator.email})</span>
+                                        <span className="ml-1 text-gray-500 text-xs">({decorator.phoneNumber})</span>
+                                    </div>
+                                    <div className="">
+                                        {
+                                            decorator.specialties.slice(0, 3).map(special => (
+                                                <div className="badge badge-secondary m-1">{special}</div>
+                                            ))
+                                        }
                                     </div>
                                     <button className="w-full bg-[#628141] text-white py-2.5 rounded-full hover:bg-[#1B211A] transition-colors font-semibold mt-4 text-sm">
                                         Book Now
@@ -444,14 +440,14 @@ const Home = () => {
 
                             {/* CTA Buttons */}
                             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                                <motion.button
+                                <Link to={'/services'}><motion.button
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                     className="px-10 py-4 bg-[#628141] text-white rounded-xl text-base font-semibold shadow-lg hover:bg-[#EBD5AB] hover:text-[#1B211A] transition-all duration-300 inline-flex items-center justify-center gap-2"
                                 >
                                     Get Started Now
                                     <ArrowRight className="w-5 h-5" />
-                                </motion.button>
+                                </motion.button></Link>
                                
                             </div>
 
