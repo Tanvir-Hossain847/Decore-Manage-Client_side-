@@ -10,7 +10,9 @@ import {
   LucideSettings,
   LucideSticker,
   LucideUser,
+  Package,
   SprayCan,
+  UserStar,
 } from "lucide-react";
 import useRole from "../Hooks/useRole";
 
@@ -115,6 +117,23 @@ const DashBoardLayout = () => {
                 </Link>
               </li>
               {
+                role === "Decorator" && <>
+                <li>
+                <Link to={"/dashboard/assignedpackage"}>
+                  <button
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex items-center gap-2"
+                    data-tip="Manage Package"
+                  >
+                    <Package className="text-secondary"></Package>
+                    <span className="is-drawer-close:hidden">
+                      Manage Package
+                    </span>
+                  </button>
+                </Link>
+              </li> 
+                </>
+              }
+              {
                 role === "Admin" && <>
                 <li>
                 <Link to={"/dashboard/approve_decorator"}>
@@ -137,6 +156,17 @@ const DashBoardLayout = () => {
                   >
                     <LucideUser className="text-secondary"></LucideUser>
                     <span className="is-drawer-close:hidden">Users</span>
+                  </button>
+                </Link>
+              </li>
+              <li>
+                <Link to={"/dashboard/assigndecorator"}>
+                  <button
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex items-center gap-2"
+                    data-tip="Assign Decorator"
+                  >
+                    <UserStar className="text-secondary"></UserStar>
+                    <span className="is-drawer-close:hidden">Assign Decorator</span>
                   </button>
                 </Link>
               </li>

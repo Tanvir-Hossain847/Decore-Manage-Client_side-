@@ -25,6 +25,9 @@ import CreateService from "../Pages/CreateService";
 import RevenueChart from "../Pages/RevenueChart";
 import ServiceDemandChart from "../Pages/ServiceDemandChart";
 import AdminRoute from "../PrivateRoute/AdminRoute";
+import AssignDecorator from "../Pages/AssignDecorator";
+import AssignedPackage from "../Pages/AssignedPackage";
+import DecoratorRoute from "../PrivateRoute/DecoratorRoute";
 
 export const router = createBrowserRouter([
   {
@@ -115,6 +118,10 @@ export const router = createBrowserRouter([
         element: <Payment_Cancel></Payment_Cancel>,
       },
       {
+        path: "/dashboard/assignedpackage",
+        element: <DecoratorRoute><AssignedPackage></AssignedPackage></DecoratorRoute>
+      },
+      {
         path: "/dashboard/approve_decorator",
         element: <AdminRoute><ApproveDecorator></ApproveDecorator>,</AdminRoute>
       },
@@ -132,7 +139,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/revenue",
-        element: <AdminRoute><RevenueChart></RevenueChart>,</AdminRoute>,
+        element: <AdminRoute><RevenueChart></RevenueChart></AdminRoute>,
+      },
+      {
+        path: "/dashboard/assigndecorator",
+        element: <AdminRoute><AssignDecorator></AssignDecorator></AdminRoute>,
       },
       {
         path: "/dashboard/service_demand",

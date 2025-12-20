@@ -1,8 +1,6 @@
 import React from "react";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-import { SpeechIcon } from "lucide-react";
-import { button, div } from "framer-motion/client";
 import Loder from "../Components/Loder";
 import Swal from "sweetalert2";
 
@@ -96,6 +94,7 @@ const ApproveDecorator = () => {
               <th>Specialties</th>
               <th>Area/Time</th>
               <th>Status</th>
+              <th>Current Work Status</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -144,7 +143,7 @@ const ApproveDecorator = () => {
                 <td>
                   <div
                     className={`${
-                      decorator.status === "Approved"
+                      decorator.status === "Available"
                         ? "badge badge-secondary"
                         : decorator.status === "Rejected"
                         ? "badge bg-red-500 text-white"
@@ -152,6 +151,19 @@ const ApproveDecorator = () => {
                     }`}
                   >
                     {decorator.status}
+                  </div>
+                </td>
+                <td>
+                  <div
+                    className={`${
+                      decorator.status === "Approved"
+                        ? "badge badge-secondary"
+                        : decorator.status === "Not-Available"
+                        ? "badge bg-red-500 text-white"
+                        : "badge badge-neutral"
+                    }`}
+                  >
+                    {decorator.currentStatus}
                   </div>
                 </td>
                 <td>
