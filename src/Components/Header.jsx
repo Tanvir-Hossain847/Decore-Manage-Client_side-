@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { Menu, X, Sparkles } from "lucide-react";
 import { Link, NavLink } from "react-router";
+import useRole from "../Hooks/useRole";
 
 const Header = () => {
   const { user, signOutUser } = useContext(AuthContext);
@@ -21,6 +22,8 @@ const Header = () => {
     { to: "/about", label: "About" },
     { to: "/contact", label: "Contact" },
   ];
+
+  const {role} = useRole()
 
   return (
     <nav className="bg-white/95 backdrop-blur-md shadow-md sticky top-0 z-50 border-b border-gray-100">
@@ -102,7 +105,7 @@ const Header = () => {
 
                       {/* Menu Items */}
                       <Link
-                        to="/dashboard/myprofile"
+                        to={role === "Admin" ? ("/dashboard/service_demand") : role === "Decorator" ? ("/dashboard/totalpayment") : ("/dashboard/myprofile")}
                         onClick={() => setIsProfileDropdownOpen(false)}
                         className="flex items-center px-4 py-3 text-gray-700 hover:bg-[#EBD5AB]/20 hover:text-[#628141] transition-colors"
                       >
@@ -228,7 +231,7 @@ const Header = () => {
                     </div>
                     </div>
                     <Link
-                      to="/dashboard"
+                      to={role === "Admin" ? ("/dashboard/service_demand") : role === "Decorator" ? ("/dashboard/totalpayment") : ("/dashboard/myprofile")}
                       onClick={() => setIsMenuOpen(false)}
                       className="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-[#EBD5AB]/20 text-gray-700"
                     >
@@ -273,14 +276,14 @@ const Header = () => {
                 ) : (
                   <>
                     <NavLink
-                      to="/login"
+                      to="/auth/login"
                       onClick={() => setIsMenuOpen(false)}
                       className="block w-full px-4 py-3 text-center text-gray-700 font-medium border border-gray-300 rounded-lg hover:bg-gray-50"
                     >
                       Login
                     </NavLink>
                     <NavLink
-                      to="/register"
+                      to="/auth/register"
                       onClick={() => setIsMenuOpen(false)}
                       className="block w-full px-4 py-3 text-center bg-[#628141] text-white rounded-lg font-medium hover:bg-[#1B211A] transition-colors"
                     >

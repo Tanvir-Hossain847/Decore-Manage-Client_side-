@@ -6,9 +6,6 @@ import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { Link } from 'react-router';
 
 const Coverage = () => {
-    // TODO: Fetch coverage zones from DB
-    // API Endpoint: GET /api/coverage-zones
-    // Expected fields: lat, lng, name, radius, address, phone, hours
     const [coverageZones] = React.useState([
         { 
             lat: 23.8103, 
@@ -41,7 +38,6 @@ const Coverage = () => {
 
     return (
         <div className="min-h-screen bg-gray-50">
-            {/* Hero Section */}
             <section className="bg-linear-to-br from-[#EBD5AB]/20 via-white to-[#628141]/10 py-20">
                 <div className="container mx-auto px-6 lg:px-12">
                     <motion.div
@@ -60,7 +56,6 @@ const Coverage = () => {
                 </div>
             </section>
 
-            {/* Map Section */}
             <section className="py-16 bg-white">
                 <div className="container mx-auto px-6 lg:px-12">
                     <motion.div
@@ -105,7 +100,6 @@ const Coverage = () => {
                 </div>
             </section>
 
-            {/* Coverage Areas List */}
             <section className="py-16 bg-[#EBD5AB]/10">
                 <div className="container mx-auto px-6 lg:px-12">
                     <motion.div
@@ -154,9 +148,9 @@ const Coverage = () => {
                                         </div>
                                     </div>
 
-                                    <button className="w-full mt-6 px-6 py-3 bg-[#628141] text-white rounded-xl font-semibold hover:bg-[#1B211A] transition-colors duration-300">
+                                    <a href="mailto:tanvirhossaintufa@gmail.com?subject=Contact%20Request&body=Hi,%0A%0AI%20want%20to%20contact%20you."><button className="w-full mt-6 px-6 py-3 bg-[#628141] text-white rounded-xl font-semibold hover:bg-[#1B211A] transition-colors duration-300">
                                         Contact This Location
-                                    </button>
+                                    </button></a>
                                 </motion.div>
                             ))}
                         </div>
@@ -164,7 +158,6 @@ const Coverage = () => {
                 </div>
             </section>
 
-            {/* CTA Section */}
             <section className="py-16 bg-white">
                 <div className="container mx-auto px-6 lg:px-12">
                     <motion.div
@@ -185,7 +178,7 @@ const Coverage = () => {
                                 Contact Us
                             </button></Link>
                             <a 
-                                href="mailto:info@decorhub.com"
+                                href="mailto:tanvirhossaintufa@gmail.com"
                                 className="px-8 py-3.5 bg-transparent text-white rounded-xl font-semibold border-2 border-[#628141] hover:bg-[#628141]/10 transition-all duration-300 inline-flex items-center justify-center gap-2"
                             >
                                 <Mail className="w-5 h-5" />

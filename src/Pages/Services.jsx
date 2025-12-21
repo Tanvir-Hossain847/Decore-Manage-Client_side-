@@ -16,7 +16,7 @@ const Services = () => {
 
 
     const axiosSecure = useAxiosSecure()
-    const { isLoading, data: services = [], refetch } = useQuery({
+    const { isLoading, data: services = [] } = useQuery({
         queryKey: ['myServices'],
         queryFn: async () => {
             const res = await axiosSecure.get(`/services`);
@@ -40,28 +40,27 @@ const Services = () => {
         if (sort === "Price: High - Low")return b.cost - a.cost
     })
 
-    // Pagination logic (for display only - all data shown on page 1)
     const itemsPerPage = 9
     const totalPages = Math.ceil(sortService.length / itemsPerPage)
-    const displayedServices = sortService // Show all services regardless of pagination
+    const displayedServices = sortService 
 
 
     return (
         <div className='bg-white py-15 space-y-10'>
             <h1 className='text-center font-bold text-4xl text-black'>Our Services</h1>
-            <div className="flex flex-row-reverse items-center justify-between w-11/12 mx-auto">
+            <div className="flex lg:flex-row-reverse flex-col-reverse gap-5 items-center justify-between lg:w-11/12 w-full mx-auto">
                 <div className="flex items-center ">
                     <input
                         type="text"
                         placeholder="Search"
-                        className="input w-95"
+                        className="input lg:w-95 lg:focus:w-95 w-full focus:w-75 transition-all duration-300 border-2 border-secondary"
                         onChange={(e) => setSearch(e.target.value)}
                     />
                     <LucideSearch className='-ms-10 z-0 mr-5'></LucideSearch>
                 </div>
                 <div className="flex items-center gap-5">
                     <fieldset className="fieldset">
-                        <select defaultValue="sort" className="select" onChange={(e) => {
+                        <select defaultValue="sort" className="select rounded-lg border-2 border-secondary" onChange={(e) => {
                             setSort(e.target.value)
                         }}>
                             <option disabled={true}>Sort</option>
@@ -71,7 +70,7 @@ const Services = () => {
                      
                     </fieldset>
                     <fieldset className="fieldset">
-                        <select defaultValue="Category" className="select" value={category} onChange={(e) => {
+                        <select defaultValue="Category" className="select rounded-lg border-2 border-secondary" value={category} onChange={(e) => {
                             setCategory(e.target.value)
                         }}>
                             <option disabled={true}>Category</option>
