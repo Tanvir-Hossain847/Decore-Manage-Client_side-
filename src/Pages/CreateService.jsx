@@ -36,7 +36,6 @@ const CreateService = () => {
         setIsSubmitting(true);
 
         try {
-            // Handle image upload
             let imageUrl = '';
             if (data.image && data.image[0]) {
                 const formData = new FormData();
@@ -73,6 +72,7 @@ const CreateService = () => {
                         });
                 reset();
                     // navigate('/dashboard/my-services');
+                    setIsSubmitting(false)
             }
         } catch (error) {
             console.log(error);
@@ -85,7 +85,6 @@ const CreateService = () => {
         <div className="min-h-screen bg-gradient-to-br from-gray-50 to-[#EBD5AB]/20 py-12 px-4">
             <div><title>Create Service</title></div>
             <div className="max-w-5xl mx-auto">
-                {/* Header Section */}
                 <div className="text-center mb-12">
                     <h1 className="text-5xl font-bold text-[#1B211A] mb-4">Create New Service</h1>
                     <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -93,19 +92,15 @@ const CreateService = () => {
                     </p>
                 </div>
 
-                {/* Main Form Card */}
                 <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
-                    {/* Form Header */}
                     <div className="bg-gradient-to-r from-[#628141] to-[#1B211A] p-8 text-white">
                         <h2 className="text-3xl font-bold mb-2">Service Creation Form</h2>
                         <p className="text-[#EBD5AB]">Fill in the details to create your new decoration service</p>
                     </div>
 
-                    {/* Form Body */}
                     <div className="p-8 lg:p-12">
                         <form onSubmit={handleSubmit(onSubmit)}>
-                            <fieldset className="fieldset">
-                                {/* Service Information Section */}
+                            <fieldset className="fieldset w-full">
                                 <div className="mb-10">
                                     <div className="flex items-center gap-3 mb-6">
                                         <div className="w-8 h-8 bg-[#628141] rounded-full flex items-center justify-center text-white font-bold">1</div>
@@ -113,7 +108,6 @@ const CreateService = () => {
                                     </div>
                                     
                                     <div className="space-y-6">
-                                        {/* Service Name */}
                                         <div>
                                             <label className="block text-sm font-semibold text-gray-700 mb-2">Service Name</label>
                                             <input

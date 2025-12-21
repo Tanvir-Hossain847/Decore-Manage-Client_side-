@@ -10,7 +10,7 @@ const Logo = () => {
                     <Sparkles className="w-6 h-6 text-white" />
                 </div>
                 <span className="text-2xl font-bold text-[#1B211A]">
-                    DecorHub
+                    StyleDecor
                 </span>
             </Link>
         </div>

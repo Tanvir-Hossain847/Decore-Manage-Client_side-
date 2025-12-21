@@ -1,16 +1,103 @@
-# React + Vite
+# 🎨 **Style Decore**
+## 📌 **Project Purpose**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Style Decore is a modern event decoration and service booking web application designed to connect users with professional decorators. The platform allows users to browse services, book decoration packages, make secure payments, and track their bookings, while admins and decorators manage assignments and workflows efficiently.
 
-Currently, two official plugins are available:
+### **This project focuses on:**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Smooth user experience
 
-## React Compiler
+Secure authentication & payments
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Scalable MERN-based frontend architecture
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 🔗 Live URL:
+https://style-decor-d89db.web.app/
+
+
+### **✨ Key Features**
+
+🔐 Authentication & Authorization using Firebase
+
+🧑‍💼 Role-based dashboard (Admin, Decorator, User)
+
+📦 Service booking & management system
+
+💳 Stripe payment integration
+
+📍 Interactive maps using Leaflet
+
+⚡ Fast performance with Vite & React 19
+
+🎨 Responsive UI with Tailwind CSS & DaisyUI
+
+🔄 Efficient data fetching & caching using TanStack React Query
+
+🎥 Smooth animations using Framer Motion
+
+🔔 User-friendly alerts with SweetAlert2
+
+### **📦 NPM Packages Used**
+Dependencies
+
+react
+
+react-dom
+
+react-router
+
+axios
+
+firebase
+
+@tanstack/react-query
+
+@stripe/react-stripe-js
+
+@stripe/stripe-js
+
+react-hook-form
+
+tailwindcss
+
+daisyui
+
+framer-motion
+
+sweetalert2
+
+leaflet
+
+react-leaflet
+
+lucide-react
+
+@tailwindcss/vite
+
+Dev Dependencies
+
+vite
+
+@vitejs/plugin-react
+
+eslint
+
+eslint-plugin-react-hooks
+
+eslint-plugin-react-refresh
+
+@eslint/js
+
+@types/react
+
+@types/react-dom
+
+globals
+
+### 🚀 Getting Started
+npm install
+npm run dev
+
+### 👨‍💻 Author
+Tanvir Hossain

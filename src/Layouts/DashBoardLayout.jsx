@@ -29,14 +29,12 @@ const DashBoardLayout = () => {
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
-          {/* Navbar */}
           <nav className="navbar w-full bg-white shadow-sm border-b border-gray-200">
             <label
               htmlFor="my-drawer-4"
               aria-label="open sidebar"
               className="btn btn-square btn-ghost text-gray-600 hover:bg-gray-100 hover:text-[#628141] transition-all duration-300"
             >
-              {/* Sidebar toggle icon */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -65,17 +63,14 @@ const DashBoardLayout = () => {
           <label
             htmlFor="my-drawer-4"
             aria-label="close sidebar"
-            className=""
+            className="drawer-overlay"
           ></label>
           <div className="flex min-h-full flex-col items-start bg-white shadow-xl border-r border-gray-200 is-drawer-close:w-21 is-drawer-open:w-64">
-            {/* Sidebar content here */}
             <ul className="menu w-full grow space-y-1 p-4">
-              {/* Logo Section */}
               <div className="p-3 mb-4 is-drawer-close:hidden">
                 <Logo></Logo>
               </div>
               
-              {/* Navigation Items */}
               <li>
                 <Link to={"/"}>
                   <button
@@ -124,10 +119,8 @@ const DashBoardLayout = () => {
                 </Link>
               </li>
               
-              {/* Decorator Section */}
               {
                 role === "Decorator" && <>
-                  {/* Section Divider */}
                   <div className="is-drawer-close:hidden">
                     <div className="flex items-center gap-2 px-3 py-4 mt-4 mb-2">
                       <div className="h-px bg-gray-300 flex-1"></div>
@@ -174,10 +167,8 @@ const DashBoardLayout = () => {
                 </>
               }
               
-              {/* Admin Section */}
               {
                 role === "Admin" && <>
-                  {/* Section Divider */}
                   <div className="is-drawer-close:hidden">
                     <div className="flex items-center gap-2 px-3 py-4 mt-4 mb-2">
                       <div className="h-px bg-gray-300 flex-1"></div>

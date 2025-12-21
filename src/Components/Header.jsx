@@ -34,7 +34,7 @@ const Header = () => {
             <div className="bg-[#628141] p-2 rounded-xl group-hover:scale-110 transition-transform duration-300">
               <Sparkles className="w-6 h-6 text-white" />
             </div>
-            <span className="text-2xl font-bold text-[#1B211A]">DecorHub</span>
+            <span className="text-2xl font-bold text-[#1B211A]">StyleDecor</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -61,7 +61,10 @@ const Header = () => {
             {user ? (
                 <div className="flex gap-5 items-center">
                 <div className="">
-                    <Link to={'/decorater'}><button className="btn btn-secondary">Be A Decorater</button></Link>
+                  {role === "Admin" ? (<Link to={'/dashboard/service_demand'}><button className="btn btn-secondary">DashBoard</button></Link>) : 
+                  role === "Decorator" ? (<Link to={'/dashboard/assignedpackage'}><button className="btn btn-secondary">Tasks</button></Link>) :
+                  (<Link to={'/decorater'}><button className="btn btn-secondary">Be A Decorator</button></Link>)
+                  }
                   </div>
               <div className="relative">
                 <button

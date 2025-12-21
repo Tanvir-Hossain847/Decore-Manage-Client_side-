@@ -79,7 +79,6 @@ const AssignDecorator = () => {
           <h1 className="text-4xl p-5 font-bold">Assign Decorator</h1>
         </div>
         <table className="table table-zebra">
-          {/* head */}
           <thead>
             <tr>
               <th></th>
@@ -130,7 +129,6 @@ const AssignDecorator = () => {
               Assign Decorator to: {selectedService?.packageTitle}
             </h3>
 
-            {/* Service Details */}
             <div className="bg-base-200 p-4 rounded-lg mb-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                 <div>
@@ -148,7 +146,6 @@ const AssignDecorator = () => {
               </div>
             </div>
 
-            {/* Available Decorators Table */}
             <div className="overflow-x-auto">
               <table className="table table-zebra w-full">
                 <thead>
@@ -164,7 +161,6 @@ const AssignDecorator = () => {
                   {decorators && decorators.length > 0 ? (
                     decorators.map((decorator) => (
                       <tr key={decorator._id} className="hover">
-                        {/* Decorator Info */}
                         <td className="py-4">
                           <div className="flex items-center gap-3">
                             <div className="avatar">
@@ -187,7 +183,6 @@ const AssignDecorator = () => {
                           </div>
                         </td>
 
-                        {/* Business Details */}
                         <td className="py-4">
                           <div>
                             <div className="font-semibold text-secondary">
@@ -218,7 +213,6 @@ const AssignDecorator = () => {
                           </div>
                         </td>
 
-                        {/* Experience & Area */}
                         <td className="py-4">
                           <div>
                             <div className="font-medium">
@@ -230,7 +224,6 @@ const AssignDecorator = () => {
                           </div>
                         </td>
 
-                        {/* Contact */}
                         <td className="py-4">
                           <div className="text-sm">
                             <div>{decorator.email}</div>
@@ -240,7 +233,6 @@ const AssignDecorator = () => {
                           </div>
                         </td>
 
-                        {/* Action */}
                         <td className="py-4">
                           <button
                             className="btn btn-secondary btn-sm"
@@ -266,7 +258,6 @@ const AssignDecorator = () => {
               </table>
             </div>
 
-            {/* Modal Actions */}
             <div className="modal-action">
               <button
                 className="btn"

@@ -28,6 +28,8 @@ const AssignedPackage = () => {
         return res.data;
       },
     });
+    console.log(decorators);
+    
     
 
 
@@ -72,7 +74,9 @@ const AssignedPackage = () => {
   };
 
   const handleCompleted = (task) => {
-    const decorator = decorators.find(d => d._id.toString() === task.decoratorId.toString())
+    const decorator = decorators?.find(d => d._id.toString() === task?.decoratorId.toString())
+    console.log(task.decoratorId);
+    
     console.log("this is the specific decorator",decorator.currentStatus);
     const updateBooking = {
       workStatus: "Completed",
