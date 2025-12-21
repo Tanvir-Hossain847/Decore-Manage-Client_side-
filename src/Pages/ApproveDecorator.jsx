@@ -18,7 +18,7 @@ const ApproveDecorator = () => {
     },
   });
 
-  if (isLoading) {
+  if (isLoading, !decorators) {
     return <Loder></Loder>;
   }
 

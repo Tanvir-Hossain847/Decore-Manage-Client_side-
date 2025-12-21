@@ -4,7 +4,7 @@ import { AuthContext } from "../Context/AuthContext";
 import Swal from "sweetalert2";
 
 const instance = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://styledecore.vercel.app",
 });
 
 const useAxiosSecure = () => {

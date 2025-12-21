@@ -17,6 +17,7 @@ import {
   UserStar,
 } from "lucide-react";
 import useRole from "../Hooks/useRole";
+import ScrollToTop from "../Components/ScrollToTop";
 
 const DashBoardLayout = () => {
   const {role} = useRole()
@@ -55,6 +56,7 @@ const DashBoardLayout = () => {
           </nav>
 
           <div className="p-6 bg-gray-50 min-h-screen">
+            <ScrollToTop></ScrollToTop>
             <Outlet></Outlet>
           </div>
         </div>

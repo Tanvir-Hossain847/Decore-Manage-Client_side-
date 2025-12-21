@@ -1,6 +1,7 @@
 import React from 'react';
 import Logo from '../Components/Logo';
 import { Outlet } from 'react-router';
+import ScrollToTop from '../Components/ScrollToTop';
 
 const AuthLayout = () => {
     return (
@@ -10,6 +11,7 @@ const AuthLayout = () => {
                 <Logo></Logo>
             </div>
             <div className="">
+                <ScrollToTop></ScrollToTop>
                 <Outlet></Outlet>
             </div>
             </div>

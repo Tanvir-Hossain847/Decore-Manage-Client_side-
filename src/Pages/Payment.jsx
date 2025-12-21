@@ -11,7 +11,7 @@ const Payment = () => {
     const axiosSecure = useAxiosSecure()
 
     useEffect(() => {
-        fetch(`http://localhost:3000/booking/${id}`)
+        fetch(`https://styledecore.vercel.app/booking/${id}`)
             .then(res => res.json())
             .then((data) => setPaymentData(data))
     }, [id])

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import Loder from "../Components/Loder";
 
 const AssignDecorator = () => {
   const axiosSecure = useAxiosSecure();
@@ -9,7 +10,7 @@ const AssignDecorator = () => {
   const [selectedService, setSelectedService] = useState(null);
   const [isAssigning, setIsAssigning] = useState(false);
 
-  const { data: services = [], refetch: refetchServices } = useQuery({
+  const {  data: services = [], refetch: refetchServices } = useQuery({
     queryKey: ["services", "Pending", "Rejected"],
     queryFn: async () => {
       const res = await axiosSecure.get("/booking?workStatus=Pending&workStatus=Rejected");
@@ -26,6 +27,10 @@ const AssignDecorator = () => {
       return res.data;
     },
   });
+
+  if(!services){
+    return <Loder></Loder>
+  }
 
   console.log("Services:", services);
   console.log("Decorators:", decorators);

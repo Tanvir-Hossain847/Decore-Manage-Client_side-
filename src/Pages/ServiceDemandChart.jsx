@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
+import Loder from '../Components/Loder';
 
 const ServiceDemandChart = () => {
     const axiosSecure = useAxiosSecure()
@@ -19,11 +20,14 @@ const ServiceDemandChart = () => {
             setServices(res.data)
         })
     },[axiosSecure])
+
+    if(!bookings, !services){
+        return <Loder></Loder>
+    }
     
     console.log('Bookings:', bookings);
     console.log('Services:', services);
 
-    // DYNAMIC CALCULATIONS FROM ACTUAL BOOKING AND SERVICE DATA
     const calculateDynamicDemand = () => {
         if (!bookings || bookings.length === 0) {
             console.log('No bookings data available');
@@ -39,15 +43,12 @@ const ServiceDemandChart = () => {
             };
         }
 
-        // Calculate total bookings
         const totalBookings = bookings.length;
 
-        // Get current month and year
         const currentDate = new Date();
         const currentMonth = currentDate.getMonth();
         const currentYear = currentDate.getFullYear();
 
-        // Calculate this month's bookings
         const thisMonthBookings = bookings.filter(booking => {
             if (!booking.createdAt) return false;
             const bookingDate = new Date(booking.createdAt);
@@ -55,7 +56,6 @@ const ServiceDemandChart = () => {
                    bookingDate.getFullYear() === currentYear;
         }).length;
 
-        // Calculate service category distribution
         const categoryColors = {
             'wedding': '#628141',
             'birthday': '#1B211A', 
@@ -68,14 +68,11 @@ const ServiceDemandChart = () => {
 
         const categoryCounts = {};
         bookings.forEach(booking => {
-            // Enhanced category detection using service data
             let category = 'other';
             
-            // First try booking category
             if (booking.category) {
                 category = booking.category.toLowerCase();
             } else if (services && services.length > 0) {
-                // Try to match with service data
                 const matchingService = services.find(service => {
                     const bookingServiceName = booking.serviceName || booking.packageTitle || '';
                     return bookingServiceName.toLowerCase().includes(service.service_name?.toLowerCase() || '') ||

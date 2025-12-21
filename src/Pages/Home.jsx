@@ -281,9 +281,9 @@ const Home = () => {
                                             ))
                                         }
                                     </div>
-                                    <button className="w-full bg-[#628141] text-white py-2.5 rounded-full hover:bg-[#1B211A] transition-colors font-semibold mt-4 text-sm">
+                                    <Link to={'/services'}><button className="w-full bg-[#628141] text-white py-2.5 rounded-full hover:bg-[#1B211A] transition-colors font-semibold mt-4 text-sm">
                                         Book Now
-                                    </button>
+                                    </button></Link>
                                 </motion.div>
                             ))}
                         </div>

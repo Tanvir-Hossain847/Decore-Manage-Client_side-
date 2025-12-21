@@ -41,7 +41,7 @@ export const router = createBrowserRouter([
         path: "/",
         element: <Home></Home>,
         loader: () =>
-          fetch("http://localhost:3000/services").then((res) => res.json()),
+          fetch("https://styledecore.vercel.app/services").then((res) => res.json()),
       },
       {
         path: "/coverage",

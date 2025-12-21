@@ -23,16 +23,13 @@ const Footer = () => {
                             Creating memorable experiences since 2020.
                         </p>
                         <div className="flex space-x-4">
-                            <a href="#" className="w-11 h-11 bg-[#628141] hover:bg-[#EBD5AB] rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <a href="https://www.facebook.com/tanvir.hossain.788840" target='blank' className="w-11 h-11 bg-[#628141] hover:bg-[#EBD5AB] rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
                                 <Facebook className="w-5 h-5" />
                             </a>
-                            <a href="#" className="w-11 h-11 bg-[#628141] hover:bg-[#EBD5AB] rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <a href="https://www.instagram.com/tanvirhossain4150/" target='blank' className="w-11 h-11 bg-[#628141] hover:bg-[#EBD5AB] rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
                                 <Instagram className="w-5 h-5" />
-                            </a>
-                            <a href="#" className="w-11 h-11 bg-[#628141] hover:bg-[#EBD5AB] rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
-                                <Twitter className="w-5 h-5" />
-                            </a>
-                            <a href="#" className="w-11 h-11 bg-[#628141] hover:bg-[#EBD5AB] rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            </a>                    
+                            <a href="www.linkedin.com/in/tanvir-hossain-2a1b52188" target='blank' className="w-11 h-11 bg-[#628141] hover:bg-[#EBD5AB] rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
                                 <Linkedin className="w-5 h-5" />
                             </a>
                         </div>
@@ -48,7 +45,7 @@ const Footer = () => {
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/service" className="text-gray-300 hover:text-[#EBD5AB] transition-colors duration-300 text-base">
+                                <Link to="/services" className="text-gray-300 hover:text-[#EBD5AB] transition-colors duration-300 text-base">
                                     Services
                                 </Link>
                             </li>
@@ -56,12 +53,7 @@ const Footer = () => {
                                 <Link to="/about" className="text-gray-300 hover:text-[#EBD5AB] transition-colors duration-300 text-base">
                                     About Us
                                 </Link>
-                            </li>
-                            <li>
-                                <Link to="/portfolio" className="text-gray-300 hover:text-[#EBD5AB] transition-colors duration-300 text-base">
-                                    Portfolio
-                                </Link>
-                            </li>
+                            </li>                           
                             <li>
                                 <Link to="/contact" className="text-gray-300 hover:text-[#EBD5AB] transition-colors duration-300 text-base">
                                     Contact

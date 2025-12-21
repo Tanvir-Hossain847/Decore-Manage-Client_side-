@@ -56,7 +56,7 @@ const PackageDetail = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:3000/services/${id}`)
+        fetch(`https://styledecore.vercel.app/services/${id}`)
             .then(res => res.json())
             .then(data => setService(data))
     }, [id])
