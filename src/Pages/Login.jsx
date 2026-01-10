@@ -197,7 +197,7 @@ const Login = () => {
                       <motion.button 
                         initial={{ y: 30, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 0.6, delay: 0.8 }}
+                        transition={{ duration: 0.4 }}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         type="submit" 
@@ -210,16 +210,17 @@ const Login = () => {
                       <motion.button 
                         initial={{ y: 30, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 0.6, delay: 0.85 }}
+                        transition={{ duration: 0.4 }}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         type="button" 
                         onClick={(e) => {
                           e.preventDefault();
                           setEmail('demo@example.com');
-                          setPassword('demo123');
+                          setPassword('Demo123!');
                         }}
-                        className="w-full bg-[#EBD5AB] hover:bg-[#628141] text-[#1B211A] hover:text-white font-semibold py-3 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-[#628141]"
+                        className="w-full bg-[#3c581e] hover:bg-black text-white
+                         hover:text-white font-semibold py-3 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl"
                       >
                         Use Demo Credentials
                       </motion.button>

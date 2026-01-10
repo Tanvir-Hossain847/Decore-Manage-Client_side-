@@ -21,7 +21,8 @@ const Registration = () => {
     handleSubmit,
     formState: { errors },
     reset,
-    watch
+    watch,
+    setValue
   } = useForm();
 
   const handleRegister = async (data) => {
@@ -382,13 +383,34 @@ const Registration = () => {
                 <motion.button 
                   initial={{ y: 30, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.6, delay: 1.0 }}
+                  transition={{ duration: 0.4 }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   type="submit" 
                   className="w-full bg-[#628141] hover:bg-[#1B211A] text-white font-semibold py-3 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl"
                 >
                   Create Account
+                </motion.button>
+
+                {/* Demo Credentials Button */}
+                <motion.button 
+                  initial={{ y: 30, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.4 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  type="button" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setValue('name', 'John Demo User');
+                    setValue('email', 'demo@example.com');
+                    setValue('password', 'Demo123!');
+                    setValue('terms', true);
+                    // Note: Photo field cannot be auto-filled for security reasons
+                  }}
+                  className="w-full bg-[#3c581e] hover:bg-black text-white font-semibold py-3 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl"
+                >
+                  Use Demo Credentials
                 </motion.button>
 
                 {/* Divider */}
