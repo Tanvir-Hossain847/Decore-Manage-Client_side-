@@ -39,7 +39,7 @@ const Coverage = () => {
     return (
         <div className="min-h-screen bg-gray-50">
             <section className="bg-linear-to-br from-[#EBD5AB]/20 via-white to-[#628141]/10 py-20">
-                <div className="container mx-auto px-6 lg:px-12">
+                <div className="w-11/12 mx-auto">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -57,7 +57,7 @@ const Coverage = () => {
             </section>
 
             <section className="py-16 bg-white">
-                <div className="container mx-auto px-6 lg:px-12">
+                <div className="w-11/12 mx-auto">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -73,7 +73,7 @@ const Coverage = () => {
                             </p>
                         </div>
                         
-                        <div className="max-w-6xl mx-auto rounded-2xl overflow-hidden shadow-xl relative z-0" style={{ height: '600px' }}>
+                        <div className="w-full h-96 md:h-[600px] rounded-2xl overflow-hidden shadow-xl relative z-0">
                             <MapContainer center={[23.8103, 90.4125]} zoom={12} scrollWheelZoom={false} style={{ height: '100%', width: '100%', zIndex: 0 }}>
                                 <TileLayer
                                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -101,7 +101,7 @@ const Coverage = () => {
             </section>
 
             <section className="py-16 bg-[#EBD5AB]/10">
-                <div className="container mx-auto px-6 lg:px-12">
+                <div className="w-11/12 mx-auto">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -117,7 +117,7 @@ const Coverage = () => {
                             </p>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {coverageZones.map((zone, index) => (
                                 <motion.div
                                     key={index}
@@ -159,7 +159,7 @@ const Coverage = () => {
             </section>
 
             <section className="py-16 bg-white">
-                <div className="container mx-auto px-6 lg:px-12">
+                <div className="w-11/12 mx-auto">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}

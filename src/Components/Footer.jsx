@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Sparkles, Mail, Phone, MapPin, Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
+import { Sparkles, Mail, Phone, MapPin, Facebook, Instagram, Twitter, Linkedin, Github } from 'lucide-react';
 
 const Footer = () => {
     return (
@@ -23,13 +23,13 @@ const Footer = () => {
                             Creating memorable experiences since 2020.
                         </p>
                         <div className="flex space-x-4">
-                            <a href="https://www.facebook.com/tanvir.hossain.788840" target='blank' className="w-11 h-11 bg-[#628141] hover:bg-[#EBD5AB] rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <a href="https://www.facebook.com/profile.php?id=61585337956146" target='blank' className="w-11 h-11 bg-[#628141] hover:bg-[#EBD5AB] rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
                                 <Facebook className="w-5 h-5" />
                             </a>
-                            <a href="https://www.instagram.com/tanvirhossain4150/" target='blank' className="w-11 h-11 bg-[#628141] hover:bg-[#EBD5AB] rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
-                                <Instagram className="w-5 h-5" />
+                            <a href="https://github.com/Tanvir-Hossain847" target='blank' className="w-11 h-11 bg-[#628141] hover:bg-[#EBD5AB] rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
+                                <Github className="w-5 h-5" />
                             </a>                    
-                            <a href="www.linkedin.com/in/tanvir-hossain-2a1b52188" target='blank' className="w-11 h-11 bg-[#628141] hover:bg-[#EBD5AB] rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <a href="https://www.linkedin.com/in/tanvir-hossain-2a1b52188/" target='blank' className="w-11 h-11 bg-[#628141] hover:bg-[#EBD5AB] rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
                                 <Linkedin className="w-5 h-5" />
                             </a>
                         </div>

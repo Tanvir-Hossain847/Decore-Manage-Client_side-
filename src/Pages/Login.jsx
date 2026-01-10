@@ -16,6 +16,7 @@ const Login = () => {
      const [err, setErr] = useState(null);
      const [showPass, setShowPass] = useState(false);
      const [email, setEmail] = useState('')
+     const [password, setPassword] = useState('')
      const axiosSecure = useAxiosSecure()
 
     // //default direct after login
@@ -146,6 +147,8 @@ const Login = () => {
                             whileFocus={{ scale: 1.02 }}
                             name='password' 
                             type={showPass ? 'text' : "password"} 
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#628141] focus:outline-none transition-all duration-300" 
                             placeholder="Enter your password" 
                           />
@@ -201,6 +204,24 @@ const Login = () => {
                         className="w-full bg-[#628141] hover:bg-[#1B211A] text-white font-semibold py-3 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl"
                       >
                         Sign In
+                      </motion.button>
+
+                      {/* Demo Credentials Button */}
+                      <motion.button 
+                        initial={{ y: 30, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 0.6, delay: 0.85 }}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        type="button" 
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setEmail('demo@example.com');
+                          setPassword('demo123');
+                        }}
+                        className="w-full bg-[#EBD5AB] hover:bg-[#628141] text-[#1B211A] hover:text-white font-semibold py-3 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-[#628141]"
+                      >
+                        Use Demo Credentials
                       </motion.button>
                     </form>
 

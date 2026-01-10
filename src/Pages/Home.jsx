@@ -12,7 +12,7 @@ const Home = () => {
 
 
     const services = useLoaderData()
-    const featuredServices = services.slice(0,6)
+    const featuredServices = services.slice(0,8)
     const [topDecorators, setTopDecorators] = useState()
 
 
@@ -42,6 +42,7 @@ const Home = () => {
         { id: 1, name: 'Jessica Williams', rating: 5, text: 'Amazing service! They transformed our wedding venue into a fairy tale. Highly recommended!', avatar: 'https://i.pravatar.cc/150?img=5' },
         { id: 2, name: 'Robert Brown', rating: 5, text: 'Professional team, great attention to detail. Our corporate event was a huge success!', avatar: 'https://i.pravatar.cc/150?img=6' },
         { id: 3, name: 'Amanda Lee', rating: 4, text: 'Beautiful home decor setup. The team was punctual and creative. Will book again!', avatar: 'https://i.pravatar.cc/150?img=7' },
+        { id: 4, name: 'Michael Chen', rating: 5, text: 'Exceptional birthday party decoration! The kids were absolutely thrilled. Worth every penny!', avatar: 'https://i.pravatar.cc/150?img=8' },
     ]);
 
     // TODO: Fetch coverage zones from DB
@@ -78,7 +79,7 @@ const Home = () => {
                 <div className="absolute top-40 left-10 w-80 h-80 bg-[#EBD5AB]/30 rounded-full mix-blend-multiply filter blur-xl opacity-40 animate-blob animation-delay-2000"></div>
                 <div className="absolute -bottom-8 left-1/2 w-80 h-80 bg-[#628141]/15 rounded-full mix-blend-multiply filter blur-xl opacity-40 animate-blob animation-delay-4000"></div>
 
-                <div className="container mx-auto px-6 lg:px-12 py-20 relative z-10">
+                <div className="w-11/12 mx-auto py-20 relative z-10">
                     <div className="grid lg:grid-cols-2 gap-16 items-center">
                         {/* Left Content */}
                         <motion.div
@@ -187,7 +188,7 @@ const Home = () => {
             </section>
 
             {/* Popular Categories */}
-            <section className="py-20 container mx-auto px-6 lg:px-12">
+            <section className="py-20 w-11/12 mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -223,7 +224,7 @@ const Home = () => {
 
             {/* Featured Services */}
             <section className="py-20 bg-white">
-                <div className="container mx-auto px-6 lg:px-12">
+                <div className="w-11/12 mx-auto">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -233,7 +234,7 @@ const Home = () => {
                         <h2 className="text-3xl md:text-4xl font-bold text-center mb-3 text-[#1B211A]">Featured Services</h2>
                         <p className="text-center text-gray-600 mb-14 text-base">Handpicked decoration packages for you</p>
                         
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7">
                             {featuredServices.map((service, index) => <ServiceCard key={index} service={service} index={index}></ServiceCard>)}
                         </div>
                     </motion.div>
@@ -242,7 +243,7 @@ const Home = () => {
 
             {/* Top Decorators */}
             <section className="py-20 bg-[#EBD5AB]/10">
-                <div className="container mx-auto px-6 lg:px-12">
+                <div className="w-11/12 mx-auto">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -293,7 +294,7 @@ const Home = () => {
 
             {/* Why Choose Us */}
             <section className="py-20 bg-[#EBD5AB]/10">
-                <div className="container mx-auto px-6 lg:px-12">
+                <div className="w-11/12 mx-auto">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -328,7 +329,7 @@ const Home = () => {
 
             {/* Service Coverage Map */}
             <section className="py-20 bg-white">
-                <div className="container mx-auto px-6 lg:px-12">
+                <div className="w-11/12 mx-auto">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -338,7 +339,7 @@ const Home = () => {
                         <h2 className="text-3xl md:text-4xl font-bold text-center mb-3 text-[#1B211A]">Service Coverage</h2>
                         <p className="text-center text-gray-600 mb-14 text-base">We serve across major areas</p>
                         
-                        <div className="max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-xl relative z-0" style={{ height: '480px' }}>
+                        <div className="w-full h-96 md:h-[480px] rounded-2xl overflow-hidden shadow-xl relative z-0">
                             <MapContainer center={[23.8103, 90.4125]} zoom={12} scrollWheelZoom={false} style={{ height: '100%', width: '100%', zIndex: 0 }}>
                                 <TileLayer
                                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -362,7 +363,7 @@ const Home = () => {
 
             {/* Testimonials */}
             <section className="py-20 bg-[#EBD5AB]/10">
-                <div className="container mx-auto px-6 lg:px-12">
+                <div className="w-11/12 mx-auto">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -372,7 +373,7 @@ const Home = () => {
                         <h2 className="text-3xl md:text-4xl font-bold text-center mb-3 text-[#1B211A]">What Our Clients Say</h2>
                         <p className="text-center text-gray-600 mb-14 text-base">Real experiences from real customers</p>
                         
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                             {testimonials.map((testimonial, index) => (
                                 <motion.div
                                     key={testimonial.id}
@@ -410,7 +411,7 @@ const Home = () => {
                     <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#628141] rounded-full filter blur-3xl"></div>
                 </div>
                 
-                <div className="container mx-auto px-6 lg:px-12 relative z-10">
+                <div className="w-11/12 mx-auto relative z-10">
                     <div className="max-w-4xl mx-auto">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
