@@ -21,12 +21,12 @@ const ServiceDemandChart = () => {
         })
     },[axiosSecure])
 
-    if(!bookings, !services){
+    if(!bookings || !services){
         return <Loder></Loder>
     }
     
     console.log('Bookings:', bookings);
-    console.log('Services:', services);
+    console.log('Serv;ppices:', services);
 
     const calculateDynamicDemand = () => {
         if (!bookings || bookings.length === 0) {
